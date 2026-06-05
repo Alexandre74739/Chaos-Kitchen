@@ -5,7 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_f50q2"]
 size = Vector3(0.7166748, 1.2088013, 0.93237305)
 
-[node name="chaise" type="Node3D" unique_id=1005074377]
+[node name="chaise" type="StaticBody3D" unique_id=498359321]
 
 [node name="chair_A" parent="." unique_id=256819548 instance=ExtResource("1_h5xcb")]
 

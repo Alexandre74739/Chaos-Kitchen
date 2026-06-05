@@ -60,6 +60,9 @@ shape = SubResource("BoxShape3D_ija6r")
 transform = Transform3D(24, 0, 0, 0, 6, 0, 0, 0, 1, -4.700592, 2, -6)
 shape = SubResource("BoxShape3D_s1mf1")
 
+[node name="porte" parent="nord" unique_id=510018054 instance=ExtResource("5_s1mf1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.2, 0.505, -6)
+
 [node name="salleViande" type="StaticBody3D" parent="nord" unique_id=764172365]
 
 [node name="nord_0" parent="nord/salleViande" unique_id=173994903 instance=ExtResource("2_ict1s")]
@@ -107,15 +110,12 @@ shape = SubResource("BoxShape3D_eeton")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.0029612, 2.026, -18.007507)
 shape = SubResource("BoxShape3D_rt3e6")
 
-[node name="porte" parent="nord" unique_id=510018054 instance=ExtResource("5_s1mf1")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.251, 0.505, -6)
-
 [node name="ouest" type="StaticBody3D" parent="." unique_id=1997866161]
 
 [node name="ouest_0" parent="ouest" unique_id=784763451 instance=ExtResource("2_ict1s")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 17, 0, -4)
 
-[node name="ouest_1" parent="ouest" unique_id=630347161 instance=ExtResource("2_ict1s")]
+[node name="ouest_1" parent="ouest" unique_id=143714497 instance=ExtResource("2_s1mf1")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 17, 0, 0)
 
 [node name="ouest_2" parent="ouest" unique_id=1789749814 instance=ExtResource("2_ict1s")]

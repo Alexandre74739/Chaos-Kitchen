@@ -46,40 +46,44 @@ script = ExtResource("2_h2yge")
 [node name="Murs" parent="." unique_id=2103636407 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -5)
 
-[node name="bacLaitue" parent="." unique_id=1035568873 instance=ExtResource("5_7mycd")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.75, 0.5, -0.259)
-
-[node name="bacTomate" parent="." unique_id=280501234 instance=ExtResource("6_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.5, -7.75)
-
-[node name="bacPain" parent="." unique_id=557251959 instance=ExtResource("7_5vw27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, -7)
-
-[node name="BacCheese" parent="." unique_id=571082802 instance=ExtResource("8_kek77")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -9.75)
-
 [node name="cuisineDecoAngle" parent="." unique_id=1994030515 instance=ExtResource("9_kek77")]
 
 [node name="plan_travail" parent="." unique_id=531940475 instance=ExtResource("10_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.306734, 0.5, -5.0000167)
 
-[node name="bacViande" parent="." unique_id=1553032363 instance=ExtResource("11_ycdy4")]
+[node name="salleViande" parent="." unique_id=627116437 instance=ExtResource("12_dg77c")]
+
+[node name="SalleRestaurant" type="Node3D" parent="." unique_id=1403850839]
+
+[node name="Table&chaises" parent="SalleRestaurant" unique_id=1273792177 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0.5, -1.5)
+
+[node name="Table&chaises2" parent="SalleRestaurant" unique_id=1766569135 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 13, 0.5, -1.5)
+
+[node name="Table&chaises3" parent="SalleRestaurant" unique_id=239037044 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.5, 0.5, -8.5)
+
+[node name="Table&chaises4" parent="SalleRestaurant" unique_id=198724163 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 17, 0.5, -4)
+
+[node name="Table&chaises5" parent="SalleRestaurant" unique_id=359976679 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0.5, -7.5)
+
+[node name="Bacs" type="Node3D" parent="." unique_id=849930343]
+
+[node name="bacViande" parent="Bacs" unique_id=1553032363 instance=ExtResource("11_ycdy4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, -16)
 nom_ingredient = "viande"
 
-[node name="salleViande" parent="." unique_id=627116437 instance=ExtResource("12_dg77c")]
+[node name="bacLaitue" parent="Bacs" unique_id=1035568873 instance=ExtResource("5_7mycd")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.75, 0.5, -0.259)
 
-[node name="Tables" type="Node3D" parent="." unique_id=99112057]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.999524, 0.5000001, -5.1144066)
+[node name="bacTomate" parent="Bacs" unique_id=280501234 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.5, -7.75)
 
-[node name="Table&chaises" parent="." unique_id=1273792177 instance=ExtResource("13_ycdy4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0.5, -1)
+[node name="bacPain" parent="Bacs" unique_id=557251959 instance=ExtResource("7_5vw27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, -7)
 
-[node name="Table&chaises2" parent="." unique_id=1766569135 instance=ExtResource("13_ycdy4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.5, -1)
-
-[node name="Table&chaises3" parent="." unique_id=239037044 instance=ExtResource("13_ycdy4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0.5, -9)
-
-[node name="Table&chaises4" parent="." unique_id=198724163 instance=ExtResource("13_ycdy4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.5, -5)
+[node name="BacCheese" parent="Bacs" unique_id=571082802 instance=ExtResource("8_kek77")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -9.75)
