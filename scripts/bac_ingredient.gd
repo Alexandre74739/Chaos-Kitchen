@@ -5,6 +5,7 @@ extends StaticBody3D
 
 func interact(joueur):
 	# Remplace l'ingrédient même si les mains sont pleines
+	AudioManager.jouer_sfx("prendre_ingredient")
 	if joueur.tient_ingredient():
 		joueur.deposer_ingredient()
 		print("Ingrédient remplacé")

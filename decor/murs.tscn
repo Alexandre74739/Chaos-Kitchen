@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://b4cii3xysdkyu" path="res://decor/porte.tscn" id="5_s1mf1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ija6r"]
-size = Vector3(0.7145996, 0.68847656, 1)
+size = Vector3(0.7145996, 0.68847656, 0.49780273)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s1mf1"]
-size = Vector3(0.2319336, 0.68847656, 1)
+size = Vector3(0.2319336, 0.68847656, 0.522583)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uvmnn"]
 size = Vector3(0.48425293, 4.1522217, 12.1829815)
@@ -24,9 +24,6 @@ size = Vector3(0.49450684, 4.1522217, 10.421379)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cbrkj"]
 size = Vector3(1, 0.68847656, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6qlhg"]
-size = Vector3(0.46516418, 3.2315063, 1.6571083)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cdmro"]
 
@@ -53,11 +50,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -6)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="nord" unique_id=1271262511]
-transform = Transform3D(24, 0, 0, 0, 6, 0, 0, 0, 1, 8.424805, 2, -6)
+transform = Transform3D(24, 0, 0, 0, 6, 0, 0, 0, 1, 8.424805, 2, -6.001343)
 shape = SubResource("BoxShape3D_ija6r")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="nord" unique_id=1932816381]
-transform = Transform3D(24, 0, 0, 0, 6, 0, 0, 0, 1, -4.700592, 2, -6)
+transform = Transform3D(24, 0, 0, 0, 6, 0, 0, 0, 1, -4.700592, 2, -6.0473022)
 shape = SubResource("BoxShape3D_s1mf1")
 
 [node name="porte" parent="nord" unique_id=510018054 instance=ExtResource("5_s1mf1")]
@@ -168,10 +165,6 @@ shape = SubResource("BoxShape3D_cbrkj")
 
 [node name="porte" parent="Separation" unique_id=85228936 instance=ExtResource("5_s1mf1")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.07, 0.505, -4.806)
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Separation" unique_id=104047599]
-transform = Transform3D(0.45243463, 0, 0.89179736, 0, 0.84997284, 0, -0.89179736, 0, 0.45243463, 2.1048892, 1.4164622, -5.221722)
-shape = SubResource("BoxShape3D_6qlhg")
 
 [node name="wall_doorway" parent="Separation" unique_id=1658102778 instance=ExtResource("3_s1mf1")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3, 0, -4)

@@ -61,6 +61,7 @@ func interact(joueur):
 
 # ── Pose l'ingrédient sur la pile ─────────────────────────
 func _poser_ingredient(nom: String, joueur):
+	AudioManager.jouer_sfx("poser_ingredient")
 	var scene = _get_asset(nom)
 	if scene == null:
 		push_error("Asset non assigné dans l'Inspector pour : " + nom)

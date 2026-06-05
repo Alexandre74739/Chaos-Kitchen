@@ -51,8 +51,10 @@ func _physics_process(delta):
 				print("Porte fermée")
 
 func _on_body_entered(body):
-	if not body is CharacterBody3D:
-		return
+	if body is CharacterBody3D:
+		if etat == EtatPorte.FERMEE:
+			AudioManager.jouer_sfx("porte")
+			etat = EtatPorte.OUVERTURE
 
 	joueurs_zone += 1
 
@@ -81,3 +83,6 @@ func _on_body_exited(body):
 		joueurs_zone = 0
 		timer_ferme = delai_fermeture
 		print("Joueur parti — fermeture dans " + str(delai_fermeture) + "s")
+
+func _on_zone_detection_body_entered(body: Node3D) -> void:
+	_on_body_entered(body)

@@ -12,8 +12,9 @@ const LEAN_MAX_ANGLE       = 6.0
 @onready var lean_pivot       = $LeanPivot
 @onready var anim             = $LeanPivot/AnimPlayerGodot
 
-var main_droite : Node3D         = null
-var particules  : GPUParticles3D = null
+var main_droite : Node3D          = null
+var particules  : GPUParticles3D  = null
+var sfx_marche  : AudioStreamPlayer = null
 
 var camera_angle        = 0.0
 var nearby_interactable = null
@@ -65,17 +66,31 @@ func _ready():
 	mesh_part.height = 0.1
 	particules.draw_pass_1 = mesh_part
 
+	# ── Lecteur dédié aux pas en boucle ───────────────────
+	sfx_marche = AudioStreamPlayer.new()
+	sfx_marche.stream    = load("res://audio/sfx/marche.mp3")
+	sfx_marche.volume_db = -5.0
+	sfx_marche.bus       = "SFX"
+	sfx_marche.pitch_scale = 1.5
+	var stream_marche = sfx_marche.stream as AudioStreamWAV
+	if stream_marche:
+		stream_marche.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	add_child(sfx_marche)
+
 func _input(event):
+	# ── Rotation caméra souris ────────────────────────────
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		camera_angle -= event.relative.y * MOUSE_SENSITIVITY
 		camera_angle = clamp(camera_angle, -0.5, 0.3)
 		spring_arm.rotation.x = camera_angle
 
+	# ── Interaction ───────────────────────────────────────
 	if event.is_action_pressed("interact"):
 		if nearby_interactable != null:
 			nearby_interactable.interact(self)
 
+	# ── Libère la souris ──────────────────────────────────
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -102,6 +117,15 @@ func _physics_process(delta):
 	velocity.z = direction.z * SPEED
 	move_and_slide()
 
+	# ── Son de marche en boucle ───────────────────────────
+	var is_moving = direction.length() > 0.1 and is_on_floor()
+	if is_moving:
+		if not sfx_marche.playing:
+			sfx_marche.play()
+	else:
+		if sfx_marche.playing:
+			sfx_marche.stop()
+
 	# ── Particules à l'atterrissage ───────────────────────
 	if etait_en_air and is_on_floor():
 		particules.restart()
@@ -119,8 +143,7 @@ func _physics_process(delta):
 
 	# ── Animation ─────────────────────────────────────────
 	if anim != null:
-		var is_moving = direction.length() > 0.1
-		if is_moving:
+		if direction.length() > 0.1:
 			if anim.current_animation != "idle_jump":
 				anim.play("idle_jump")
 		else:
