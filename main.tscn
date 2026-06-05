@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://dohwlug7cn4qh"]
+
+[ext_resource type="PackedScene" uid="uid://bn4xwtlcivxdi" path="res://decor/sol.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ygyt805ni8r3" path="res://entities/personnages/player.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://d3ja886quqeej" path="res://scripts/player.gd" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dhn3cw0dwonn" path="res://decor/murs.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://oafx6i7pqmh7" path="res://decor/bacLaitue.tscn" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://cxip3pcukaia1" path="res://decor/bacTomate.tscn" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://7owenrb44csd" path="res://decor/bacPain.tscn" id="7_5vw27"]
+[ext_resource type="PackedScene" uid="uid://0wj5t0dxqwvc" path="res://decor/bacCheese.tscn" id="8_kek77"]
+[ext_resource type="PackedScene" uid="uid://cx7egaks6m2sw" path="res://decor/cuisineDecoAngle.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://webtiyr65b6n" path="res://entities/items/plan_travail.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bnif6yvqaojvc" path="res://decor/bacViande.tscn" id="11_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://e61t1uihktfy" path="res://decor/salleViande.tscn" id="12_dg77c"]
+[ext_resource type="PackedScene" uid="uid://clarwacyh6sxa" path="res://decor/Table&Chaises.tscn" id="13_ycdy4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_main"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 2
+sky = SubResource("Sky_main")
+tonemap_mode = 2
+
+[node name="Main" type="Node3D" unique_id=1]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2]
+environment = SubResource("Environment_main")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=3]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 6, 0)
+light_energy = 0.4
+shadow_enabled = true
+
+[node name="Sol" parent="." unique_id=1218851493 instance=ExtResource("1_ig7tw")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Player" parent="." unique_id=1543036325 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 7.2657757, 1.542, -6.101)
+script = ExtResource("2_h2yge")
+
+[node name="Murs" parent="." unique_id=2103636407 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -5)
+
+[node name="bacLaitue" parent="." unique_id=1035568873 instance=ExtResource("5_7mycd")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.75, 0.5, -0.259)
+
+[node name="bacTomate" parent="." unique_id=280501234 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.5, -7.75)
+
+[node name="bacPain" parent="." unique_id=557251959 instance=ExtResource("7_5vw27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, -7)
+
+[node name="BacCheese" parent="." unique_id=571082802 instance=ExtResource("8_kek77")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -9.75)
+
+[node name="cuisineDecoAngle" parent="." unique_id=1994030515 instance=ExtResource("9_kek77")]
+
+[node name="plan_travail" parent="." unique_id=531940475 instance=ExtResource("10_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.306734, 0.5, -5.0000167)
+
+[node name="bacViande" parent="." unique_id=1553032363 instance=ExtResource("11_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, -16)
+nom_ingredient = "viande"
+
+[node name="salleViande" parent="." unique_id=627116437 instance=ExtResource("12_dg77c")]
+
+[node name="Tables" type="Node3D" parent="." unique_id=99112057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.999524, 0.5000001, -5.1144066)
+
+[node name="Table&chaises" parent="." unique_id=1273792177 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0.5, -1)
+
+[node name="Table&chaises2" parent="." unique_id=1766569135 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.5, -1)
+
+[node name="Table&chaises3" parent="." unique_id=239037044 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0.5, -9)
+
+[node name="Table&chaises4" parent="." unique_id=198724163 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.5, -5)

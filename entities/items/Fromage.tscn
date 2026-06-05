@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dm6huako8k6x4"]
+
+[ext_resource type="PackedScene" uid="uid://bsjf67g1wgk8u" path="res://assets/food_ingredient_cheese.fbx" id="1_ljiae"]
+
+[node name="Fromage" type="Node3D" unique_id=327283538]
+
+[node name="food_ingredient_cheese" parent="." unique_id=1381976377 instance=ExtResource("1_ljiae")]

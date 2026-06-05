@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bx3w5o2rh7vep"]
+
+[ext_resource type="Script" path="res://scripts/client.gd" id="1_client"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_client"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_client"]
+
+[node name="Client" type="StaticBody3D"]
+script = ExtResource("1_client")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_client")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_client")

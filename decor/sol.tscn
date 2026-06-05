@@ -1,0 +1,325 @@
+[gd_scene format=3 uid="uid://bn4xwtlcivxdi"]
+
+[ext_resource type="PackedScene" uid="uid://371526l68kj1" path="res://assets/floor_kitchen_small.fbx" id="1_ksydn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7o7al"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ep51b"]
+size = Vector3(12.135376, 1, 10.051514)
+
+[node name="Sol" type="StaticBody3D" unique_id=1218851493]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2044630025]
+transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 24, 5, 0, 11)
+shape = SubResource("BoxShape3D_7o7al")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=764564450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.945793, 0, 3.9715576)
+shape = SubResource("BoxShape3D_ep51b")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=233490804]
+
+[node name="tuile_1" parent="Node3D" unique_id=169324891 instance=ExtResource("1_ksydn")]
+
+[node name="tuile_2" parent="Node3D" unique_id=386592611 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="tuile_3" parent="Node3D" unique_id=1466393142 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="tuile_4" parent="Node3D" unique_id=828521458 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="tuile_5" parent="Node3D" unique_id=801938456 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="tuile_6" parent="Node3D" unique_id=1410677824 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="tuile_7" parent="Node3D" unique_id=450266978 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="tuile_8" parent="Node3D" unique_id=855839330 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="tuile_9" parent="Node3D" unique_id=345503772 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="tuile_10" parent="Node3D" unique_id=1084493572 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[node name="tuile_11" parent="Node3D" unique_id=265220739 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
+
+[node name="tuile_12" parent="Node3D" unique_id=711244245 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+
+[node name="tuile_13" parent="Node3D" unique_id=1987235478 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="tuile_14" parent="Node3D" unique_id=1517485586 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="tuile_15" parent="Node3D" unique_id=449461052 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="tuile_16" parent="Node3D" unique_id=82857311 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+
+[node name="tuile_17" parent="Node3D" unique_id=740954669 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="tuile_18" parent="Node3D" unique_id=166974977 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 4)
+
+[node name="tuile_19" parent="Node3D" unique_id=657110857 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="tuile_20" parent="Node3D" unique_id=1878556256 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+
+[node name="tuile_21" parent="Node3D" unique_id=1189067273 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+
+[node name="tuile_22" parent="Node3D" unique_id=785583456 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+
+[node name="tuile_23" parent="Node3D" unique_id=2029011425 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
+
+[node name="tuile_24" parent="Node3D" unique_id=850144569 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6)
+
+[node name="tuile_25" parent="Node3D" unique_id=740609379 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="tuile_26" parent="Node3D" unique_id=341769626 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 8)
+
+[node name="tuile_27" parent="Node3D" unique_id=1210048099 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+
+[node name="tuile_28" parent="Node3D" unique_id=847089525 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
+
+[node name="tuile_29" parent="Node3D" unique_id=1491346631 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+
+[node name="tuile_30" parent="Node3D" unique_id=1821121520 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 8)
+
+[node name="tuile_31" parent="Node3D" unique_id=1729159832 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="tuile_32" parent="Node3D" unique_id=967342375 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
+
+[node name="tuile_33" parent="Node3D" unique_id=1595244425 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 10)
+
+[node name="tuile_34" parent="Node3D" unique_id=605425968 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 10)
+
+[node name="tuile_35" parent="Node3D" unique_id=888306381 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 10)
+
+[node name="tuile_36" parent="Node3D" unique_id=1386902032 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
+
+[node name="tuile_37" parent="Node3D" unique_id=757195595 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="tuile_38" parent="Node3D" unique_id=972043296 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 12)
+
+[node name="tuile_39" parent="Node3D" unique_id=581380965 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 12)
+
+[node name="tuile_40" parent="Node3D" unique_id=1855107207 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 12)
+
+[node name="tuile_41" parent="Node3D" unique_id=1046935341 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 12)
+
+[node name="tuile_42" parent="Node3D" unique_id=26712850 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 12)
+
+[node name="tuile_43" parent="Node3D" unique_id=939672819 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+
+[node name="tuile_44" parent="Node3D" unique_id=1433101840 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 14)
+
+[node name="tuile_45" parent="Node3D" unique_id=1103951902 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 14)
+
+[node name="tuile_46" parent="Node3D" unique_id=1739133855 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 14)
+
+[node name="tuile_47" parent="Node3D" unique_id=489635855 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 14)
+
+[node name="tuile_48" parent="Node3D" unique_id=897961629 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 14)
+
+[node name="tuile_49" parent="Node3D" unique_id=1737875114 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+
+[node name="tuile_50" parent="Node3D" unique_id=1585982873 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 16)
+
+[node name="tuile_51" parent="Node3D" unique_id=1187232263 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 16)
+
+[node name="tuile_52" parent="Node3D" unique_id=114935250 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 16)
+
+[node name="tuile_53" parent="Node3D" unique_id=2122550490 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 16)
+
+[node name="tuile_54" parent="Node3D" unique_id=235647839 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 16)
+
+[node name="tuile_55" parent="Node3D" unique_id=1418033634 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
+
+[node name="tuile_56" parent="Node3D" unique_id=1860097840 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 18)
+
+[node name="tuile_57" parent="Node3D" unique_id=1821787373 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 18)
+
+[node name="tuile_58" parent="Node3D" unique_id=248402021 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 18)
+
+[node name="tuile_59" parent="Node3D" unique_id=382274550 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 18)
+
+[node name="tuile_60" parent="Node3D" unique_id=836108603 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 18)
+
+[node name="tuile_61" parent="Node3D" unique_id=1279953758 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+
+[node name="tuile_62" parent="Node3D" unique_id=1098443905 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 20)
+
+[node name="tuile_63" parent="Node3D" unique_id=1883944732 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 20)
+
+[node name="tuile_64" parent="Node3D" unique_id=220712087 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 20)
+
+[node name="tuile_65" parent="Node3D" unique_id=2116791584 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 20)
+
+[node name="tuile_66" parent="Node3D" unique_id=1802962847 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 20)
+
+[node name="tuile_67" parent="Node3D" unique_id=1675705504 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22)
+
+[node name="tuile_68" parent="Node3D" unique_id=92683938 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 22)
+
+[node name="tuile_69" parent="Node3D" unique_id=232597365 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 22)
+
+[node name="tuile_70" parent="Node3D" unique_id=177839976 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 22)
+
+[node name="tuile_71" parent="Node3D" unique_id=2015453978 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 22)
+
+[node name="tuile_72" parent="Node3D" unique_id=875911124 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 22)
+
+[node name="tuile_73" parent="Node3D" unique_id=230705611 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 8)
+
+[node name="tuile_74" parent="Node3D" unique_id=1408416548 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 6)
+
+[node name="tuile_75" parent="Node3D" unique_id=422256821 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4)
+
+[node name="tuile_76" parent="Node3D" unique_id=296073798 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 2)
+
+[node name="tuile_77" parent="Node3D" unique_id=1813366459 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="tuile_78" parent="Node3D" unique_id=1733937373 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 8)
+
+[node name="tuile_79" parent="Node3D" unique_id=1772476133 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 6)
+
+[node name="tuile_80" parent="Node3D" unique_id=1802569281 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 4)
+
+[node name="tuile_81" parent="Node3D" unique_id=663147217 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 2)
+
+[node name="tuile_82" parent="Node3D" unique_id=1583741952 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+
+[node name="tuile_83" parent="Node3D" unique_id=668809247 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 8)
+
+[node name="tuile_84" parent="Node3D" unique_id=2138590732 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 6)
+
+[node name="tuile_85" parent="Node3D" unique_id=1053978296 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 4)
+
+[node name="tuile_86" parent="Node3D" unique_id=414916403 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 2)
+
+[node name="tuile_87" parent="Node3D" unique_id=1064739725 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+
+[node name="tuile_88" parent="Node3D" unique_id=411039290 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 8)
+
+[node name="tuile_89" parent="Node3D" unique_id=1639551008 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 6)
+
+[node name="tuile_90" parent="Node3D" unique_id=776383850 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 4)
+
+[node name="tuile_91" parent="Node3D" unique_id=2030580513 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 2)
+
+[node name="tuile_92" parent="Node3D" unique_id=1595084671 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
+
+[node name="tuile_93" parent="Node3D" unique_id=1000706356 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 8)
+
+[node name="tuile_94" parent="Node3D" unique_id=1870094884 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 6)
+
+[node name="tuile_95" parent="Node3D" unique_id=270852703 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 4)
+
+[node name="tuile_96" parent="Node3D" unique_id=1526103160 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 2)
+
+[node name="tuile_97" parent="Node3D" unique_id=1905294692 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="tuile_98" parent="Node3D" unique_id=45408015 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 8)
+
+[node name="tuile_99" parent="Node3D" unique_id=1078271679 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 6)
+
+[node name="tuile_100" parent="Node3D" unique_id=296146940 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 4)
+
+[node name="tuile_101" parent="Node3D" unique_id=478175002 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 2)
+
+[node name="tuile_102" parent="Node3D" unique_id=1618121281 instance=ExtResource("1_ksydn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 0)

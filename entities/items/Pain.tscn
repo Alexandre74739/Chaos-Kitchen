@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cbctmq45cl0kl"]
+
+[ext_resource type="PackedScene" uid="uid://cxo2mybfgaapw" path="res://assets/food_ingredient_bun.fbx" id="1_abajg"]
+
+[node name="Pain" type="Node3D" unique_id=713769732]
+
+[node name="food_ingredient_bun" parent="." unique_id=1784077407 instance=ExtResource("1_abajg")]

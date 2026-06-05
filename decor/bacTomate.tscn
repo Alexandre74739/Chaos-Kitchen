@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cxip3pcukaia1"]
+
+[ext_resource type="Script" uid="uid://clqkoyfoad1n3" path="res://scripts/bac_ingredient.gd" id="1_h2drj"]
+[ext_resource type="PackedScene" uid="uid://ccjugucc5j2ql" path="res://assets/crate_tomatoes.fbx" id="1_nt8ul"]
+[ext_resource type="PackedScene" uid="uid://dcwnbmrqcrtuh" path="res://entities/items/Tomate.tscn" id="2_g1l6f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bxqvv"]
+size = Vector3(2.0497437, 0.8473816, 2.0700684)
+
+[node name="bacTomate" type="StaticBody3D" unique_id=1035568873]
+script = ExtResource("1_h2drj")
+ingredient_scene = ExtResource("2_g1l6f")
+nom_ingredient = "tomate"
+
+[node name="crate_tomatoes" parent="." unique_id=418711952 instance=ExtResource("1_nt8ul")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1780732411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001373291, 0.40298808, -0.00036621094)
+shape = SubResource("BoxShape3D_bxqvv")

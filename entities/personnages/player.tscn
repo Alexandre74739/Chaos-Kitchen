@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://ygyt805ni8r3"]
+
+[ext_resource type="PackedScene" uid="uid://o7ad0v35ek1j" path="res://assets/Luigi.glb" id="Luigi_glb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xlb5f"]
+
+[sub_resource type="Animation" id="Animation_xlb5f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i0ma1"]
+resource_name = "idle_jump"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.15, 0), Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6n87f"]
+resource_name = "idle_organic"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.05, 0), Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i0ma1"]
+_data = {
+&"RESET": SubResource("Animation_xlb5f"),
+&"idle_jump": SubResource("Animation_i0ma1"),
+&"idle_organic": SubResource("Animation_6n87f")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hqtel"]
+radius = 1.5
+
+[node name="Player" type="CharacterBody3D" unique_id=1543036325]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1078158604]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, -0.5790254, 0.0041422844)
+shape = SubResource("SphereShape3D_xlb5f")
+
+[node name="LeanPivot" type="Node3D" parent="." unique_id=180029055]
+
+[node name="MainDroite" type="Node3D" parent="LeanPivot" unique_id=1793824698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7902023, -1.2605565, -0.085788436)
+
+[node name="AnimPlayerGodot" type="AnimationPlayer" parent="LeanPivot" unique_id=871300948]
+libraries/ = SubResource("AnimationLibrary_i0ma1")
+
+[node name="Luigi" parent="LeanPivot" unique_id=1924431096 instance=ExtResource("Luigi_glb")]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, 0, -1.2495492, 0)
+
+[node name="CameraRoot" type="Node3D" parent="." unique_id=690350155]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraRoot" unique_id=1528308319]
+spring_length = 6.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraRoot/SpringArm3D" unique_id=1461293905]
+
+[node name="InteractionZone" type="Area3D" parent="." unique_id=346544132]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionZone" unique_id=2118148632]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.67211235, 0)
+shape = SubResource("SphereShape3D_hqtel")

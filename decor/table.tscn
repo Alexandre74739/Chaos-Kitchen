@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://8c1ddv2bwl44"]
+
+[ext_resource type="PackedScene" uid="uid://c47u8fopi3w60" path="res://assets/table_round_A_small.fbx" id="1_vhue7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u48hs"]
+radius = 0.7895141
+
+[node name="table" type="Node3D" unique_id=1145870556]
+
+[node name="table_round_A_small" parent="." unique_id=1645258592 instance=ExtResource("1_vhue7")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=851016657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91053104, 0)
+shape = SubResource("SphereShape3D_u48hs")

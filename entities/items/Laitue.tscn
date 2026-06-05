@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://4te5m3vjr6k5"]
+
+[ext_resource type="PackedScene" uid="uid://b58f8vxxxiryp" path="res://assets/food_ingredient_lettuce.fbx" id="1_swxif"]
+
+[node name="Laitue" type="Node3D" unique_id=2007568890]
+
+[node name="food_ingredient_lettuce" parent="." unique_id=1933616102 instance=ExtResource("1_swxif")]

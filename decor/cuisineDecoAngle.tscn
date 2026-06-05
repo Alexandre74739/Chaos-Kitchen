@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cx7egaks6m2sw"]
+
+[ext_resource type="PackedScene" uid="uid://dlfr1cl1w78qr" path="res://assets/kitchencounter_innercorner_backsplash.fbx" id="1_fhj0d"]
+[ext_resource type="PackedScene" uid="uid://hlk2f1pljy4u" path="res://assets/kitchencounter_sink_backsplash.fbx" id="2_crr0u"]
+[ext_resource type="PackedScene" uid="uid://clewuy3gkkxxt" path="res://assets/kitchencounter_straight_B_backsplash.fbx" id="3_kngce"]
+[ext_resource type="PackedScene" uid="uid://knpb2nnsyngr" path="res://assets/kitchencounter_straight_A_decorated.fbx" id="4_v356l"]
+[ext_resource type="PackedScene" uid="uid://b2cs14hlj75js" path="res://assets/kitchencabinet_corner_half.fbx" id="5_16iir"]
+[ext_resource type="PackedScene" uid="uid://cqutfugvwnr1t" path="res://assets/kitchencabinet_half.fbx" id="6_6i3yj"]
+[ext_resource type="PackedScene" uid="uid://stjm2h1i5ntu" path="res://assets/shelf_papertowel_decorated.fbx" id="7_bo1on"]
+[ext_resource type="PackedScene" uid="uid://dbnx0vsmnvcwd" path="res://assets/stove_multi.fbx" id="8_kbubp"]
+[ext_resource type="PackedScene" uid="uid://ccgiymcjc2fvd" path="res://assets/extractorhood.fbx" id="9_c6ku7"]
+[ext_resource type="PackedScene" uid="uid://dp1qyma108qk8" path="res://assets/kitchencounter_straight_decorated.fbx" id="10_p40uv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nodby"]
+size = Vector3(2.1431885, 3.515625, 7.550293)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5wr55"]
+size = Vector3(6.344269, 3.711792, 1.7756348)
+
+[node name="cuisineDecoAngle" type="StaticBody3D" unique_id=1994030515]
+
+[node name="kitchencounter_innercorner_backsplash" parent="." unique_id=974307866 instance=ExtResource("1_fhj0d")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.25, 0.5, -0.25)
+
+[node name="kitchencounter_sink_backsplash" parent="." unique_id=116938204 instance=ExtResource("2_crr0u")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -3.75)
+
+[node name="kitchencounter_straight_B_backsplash2" parent="." unique_id=1704798152 instance=ExtResource("3_kngce")]
+transform = Transform3D(-3.278354e-08, 0, 1, 0, 1, 0, -0.75, 0, -4.371139e-08, 0.25, 0.5, -2)
+
+[node name="kitchencounter_straight_A_decorated" parent="." unique_id=1488897997 instance=ExtResource("4_v356l")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -5.75)
+
+[node name="kitchencabinet_corner_half" parent="." unique_id=1519617152 instance=ExtResource("5_16iir")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.25, 0, 0.75)
+
+[node name="kitchencabinet_half" parent="." unique_id=647705453 instance=ExtResource("6_6i3yj")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.75, 0, -4.25)
+
+[node name="shelf_papertowel_decorated" parent="." unique_id=1760171615 instance=ExtResource("7_bo1on")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.75, 3.25, -2.25)
+
+[node name="stove_multi" parent="." unique_id=1503071589 instance=ExtResource("8_kbubp")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.25, 0.5, -0.25)
+
+[node name="extractorhood" parent="." unique_id=47487692 instance=ExtResource("9_c6ku7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.25, 0.75, 0.75)
+
+[node name="kitchencounter_straight_decorated" parent="." unique_id=1095152994 instance=ExtResource("10_p40uv")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.25, 0.5, -0.25)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2007973943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31280518, 2.2578125, -3.026123)
+shape = SubResource("BoxShape3D_nodby")
+debug_color = Color(0, 0.5950001, 0.7, 1)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=247661568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.127716, 2.0718558, -0.38781738)
+shape = SubResource("BoxShape3D_5wr55")

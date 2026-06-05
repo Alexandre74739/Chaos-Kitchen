@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://oafx6i7pqmh7"]
+
+[ext_resource type="Script" uid="uid://clqkoyfoad1n3" path="res://scripts/bac_ingredient.gd" id="1_enqtx"]
+[ext_resource type="PackedScene" uid="uid://4te5m3vjr6k5" path="res://entities/items/Laitue.tscn" id="2_veogt"]
+[ext_resource type="PackedScene" uid="uid://ogbpwusoq1fh" path="res://assets/crate_lettuce.fbx" id="3_vsaws"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bxqvv"]
+size = Vector3(2.0497437, 0.8473816, 2.0700684)
+
+[node name="bacLaitue" type="StaticBody3D" unique_id=1035568873]
+script = ExtResource("1_enqtx")
+ingredient_scene = ExtResource("2_veogt")
+nom_ingredient = "salade"
+
+[node name="crate_lettuce" parent="." unique_id=1297717465 instance=ExtResource("3_vsaws")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1780732411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001373291, 0.40298808, -0.00036621094)
+shape = SubResource("BoxShape3D_bxqvv")

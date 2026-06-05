@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://by4g524a1ocj2"]
+
+[ext_resource type="PackedScene" uid="uid://bepqupbjaiv18" path="res://assets/food_ingredient_burger_cooked.fbx" id="1_ntjhc"]
+
+[node name="Viande" type="Node3D" unique_id=878646379]
+
+[node name="food_ingredient_burger_cooked" parent="." unique_id=2025350505 instance=ExtResource("1_ntjhc")]

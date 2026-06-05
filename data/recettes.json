@@ -1,0 +1,15 @@
+{
+  "base": "pain",
+  "garnitures": [
+	{ "resultat": "viande_cuit", "nom": "Steak" },
+	{ "resultat": "laitue_coupe", "nom": "Salade" },
+	{ "resultat": "tomate_coupe", "nom": "Tomate" },
+	{ "resultat": "fromage_coupe", "nom": "Fromage" }
+  ],
+  "min_garnitures": 1,
+  "max_garnitures": 4,
+  "points_base": 100,
+  "points_par_garniture": 50,
+  "duree_base": 30.0,
+  "duree_par_garniture": 15.0
+}

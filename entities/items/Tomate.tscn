@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dcwnbmrqcrtuh"]
+
+[ext_resource type="PackedScene" uid="uid://cerf3l8bacce6" path="res://assets/food_ingredient_tomato.fbx" id="1_yup7y"]
+
+[node name="Tomate" type="Node3D" unique_id=1494664886]
+
+[node name="food_ingredient_tomato" parent="." unique_id=865686839 instance=ExtResource("1_yup7y")]

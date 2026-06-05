@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bnif6yvqaojvc"]
+
+[ext_resource type="Script" uid="uid://clqkoyfoad1n3" path="res://scripts/bac_ingredient.gd" id="1_mx7cu"]
+[ext_resource type="PackedScene" uid="uid://cf8tfbpypw2u1" path="res://assets/food_ingredient_burger_uncooked.fbx" id="2_mx7cu"]
+[ext_resource type="PackedScene" uid="uid://p066iun2jswc" path="res://assets/crate_steak.fbx" id="3_xb6l4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bxqvv"]
+size = Vector3(2.0497437, 0.8473816, 2.0700684)
+
+[node name="bacViande" type="StaticBody3D" unique_id=1035568873]
+script = ExtResource("1_mx7cu")
+ingredient_scene = ExtResource("2_mx7cu")
+nom_ingredient = "salade"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1780732411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001373291, 0.40298808, -0.00036621094)
+shape = SubResource("BoxShape3D_bxqvv")
+
+[node name="crate_steak" parent="." unique_id=1914655816 instance=ExtResource("3_xb6l4")]

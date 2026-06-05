@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cd1uj51nrq8fs"]
+
+[ext_resource type="PackedScene" uid="uid://o7ad0v35ek1j" path="res://assets/Luigi.glb" id="1_3qe6b"]
+
+[node name="Luigi" unique_id=1924431096 instance=ExtResource("1_3qe6b")]
+
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(1833927634) index="0" unique_id=632681664]
+bones/0/position = Vector3(1.110223e-16, 0.21552648, -0.06594822)
+bones/0/scale = Vector3(1, 0.71249413, 1)
+bones/1/rotation = Quaternion(0, 1.19209275e-07, 0, 1)
+bones/1/scale = Vector3(1, 1.4035202, 1)
+bones/2/rotation = Quaternion(0.8193207, 0.006102366, -0.007981919, 0.57324743)
+bones/2/scale = Vector3(1, 1.0514003, 1.3654401)
+bones/3/rotation = Quaternion(-0.81727207, 0.005986803, 0.008492191, 0.57615846)
+
+[node name="Head_2" parent="Armature/Skeleton3D" index="0" unique_id=208130347]
+transform = Transform3D(1, 0, 2.3841855e-07, 0, 0.99999994, 0, -2.3841855e-07, 0, 1, -4.6566118e-10, 1.0290478, -0.06594822)
+
+[node name="Left-Hand_2" parent="Armature/Skeleton3D" index="1" unique_id=1316104232]
+transform = Transform3D(0.9997981, 0.020135175, -0.008306206, 0.0006044518, -0.25672242, -0.91395545, -0.020075833, 0.9875273, -0.4678644, -4.6566118e-10, 1.0290478, -0.06594822)
+
+[node name="Right-Hand_2" parent="Armature/Skeleton3D" index="2" unique_id=1740625983]
+transform = Transform3D(0.99978405, -0.019571384, -0.0069821654, 1.9906856e-09, -0.23940605, 0.6710682, -0.020779554, -0.9416545, -0.33593866, -4.6566118e-10, 1.0290478, -0.06594822)
+
+[node name="Body_2" parent="Armature/Skeleton3D" index="3" unique_id=1657607123]
+transform = Transform3D(1, 0, 0, 0, 0.71249413, 0, 0, 0, 1, 1.110223e-16, 0.21552648, -0.06594822)

@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://e61t1uihktfy"]
+
+[ext_resource type="PackedScene" uid="uid://c7fy7jr6r4xf0" path="res://assets/kitchentable_A_large.fbx" id="1_35eyu"]
+[ext_resource type="PackedScene" uid="uid://drwllss7mf0ib" path="res://assets/kitchentable_sink_large_decorated.fbx" id="2_jj0k6"]
+[ext_resource type="PackedScene" uid="uid://jo8nyrcb6guv" path="res://assets/pan_A.fbx" id="3_wq8a3"]
+[ext_resource type="PackedScene" uid="uid://c5wjjot6k4uib" path="res://assets/pan_006.fbx" id="4_rl4us"]
+[ext_resource type="PackedScene" uid="uid://clfqcincihely" path="res://assets/kitchentable_A_large_decorated.fbx" id="5_g22cg"]
+[ext_resource type="PackedScene" uid="uid://chxpxjmpgfh5h" path="res://assets/oven.fbx" id="6_0dyr2"]
+[ext_resource type="PackedScene" uid="uid://dl8lvkig8buu5" path="res://assets/kitchentable_A.fbx" id="7_ja88t"]
+[ext_resource type="PackedScene" uid="uid://cqutfugvwnr1t" path="res://assets/kitchencabinet_half.fbx" id="8_oy8bf"]
+[ext_resource type="PackedScene" uid="uid://b2cs14hlj75js" path="res://assets/kitchencabinet_corner_half.fbx" id="9_fhekv"]
+[ext_resource type="PackedScene" uid="uid://stjm2h1i5ntu" path="res://assets/shelf_papertowel_decorated.fbx" id="10_evgs3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4suub"]
+size = Vector3(1.9786911, 3.67865, 11.3479)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5x63n"]
+size = Vector3(4.0181427, 1, 0.93066406)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1xyvn"]
+size = Vector3(0.9425049, 1.1429138, 3.7469788)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xiv58"]
+size = Vector3(2.0463562, 1.545929, 3.078827)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kkntt"]
+size = Vector3(2.644043, 2.834961, 2.05262)
+
+[node name="salleViande" type="StaticBody3D" unique_id=627116437]
+
+[node name="kitchentable_A_large" parent="." unique_id=1339176518 instance=ExtResource("1_35eyu")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -15.75)
+
+[node name="kitchentable_sink_large_decorated" parent="." unique_id=378495835 instance=ExtResource("2_jj0k6")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -12.75)
+
+[node name="kitchentable_A_large2" parent="." unique_id=2070761788 instance=ExtResource("1_35eyu")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.25, 0.5, -20.986147)
+
+[node name="pan_A" parent="kitchentable_A_large2" unique_id=523431635 instance=ExtResource("3_wq8a3")]
+transform = Transform3D(-0.36812457, 0, 0.9297765, 0, 1, 0, -0.9297765, 0, -0.36812457, 0.021362305, 1, -0.037781656)
+
+[node name="pan_006" parent="kitchentable_A_large2" unique_id=2078634107 instance=ExtResource("4_rl4us")]
+transform = Transform3D(-0.491651, -0.29541373, 0.81915206, -0.5150381, 0.8571673, 0, -0.70215034, -0.4218945, -0.5735765, -0.37854385, 1.1463306, -0.4538268)
+
+[node name="kitchentable_A_large_decorated" parent="." unique_id=1675523273 instance=ExtResource("5_g22cg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0.5, -18.5)
+
+[node name="oven" parent="." unique_id=544196847 instance=ExtResource("6_0dyr2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.5, -18.35)
+
+[node name="kitchentable_A" parent="." unique_id=1186163816 instance=ExtResource("7_ja88t")]
+transform = Transform3D(1.25, 0, 0, 0, 1, 0, 0, 0, 1, 7.35, 0.5, -19)
+
+[node name="kitchencabinet_half2" parent="." unique_id=647705453 instance=ExtResource("8_oy8bf")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.2500005, 0, -11.25)
+
+[node name="kitchencabinet_half" parent="." unique_id=2139490866 instance=ExtResource("8_oy8bf")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.75, 0, -21)
+
+[node name="kitchencabinet_corner_half" parent="." unique_id=1519617152 instance=ExtResource("9_fhekv")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.25, 0, -11.25)
+
+[node name="kitchencabinet_half3" parent="." unique_id=1630193448 instance=ExtResource("8_oy8bf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.75, 0, -14.25)
+
+[node name="shelf_papertowel_decorated" parent="." unique_id=1760171615 instance=ExtResource("10_evgs3")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.75, 3.25, -12.25)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1909931975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2422142, 2.2259827, -16.894897)
+shape = SubResource("BoxShape3D_4suub")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=692635204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2537766, 3.6377535, -11.711182)
+shape = SubResource("BoxShape3D_5x63n")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1165319551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.309244, 3.5653758, -13.412613)
+shape = SubResource("BoxShape3D_1xyvn")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=1245676711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.995061, 1.447676, -18.504911)
+shape = SubResource("BoxShape3D_xiv58")
+debug_fill = false
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=742913651]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.307617, 0.91748047, -18.969723)
+shape = SubResource("BoxShape3D_kkntt")

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://0wj5t0dxqwvc"]
+
+[ext_resource type="Script" uid="uid://clqkoyfoad1n3" path="res://scripts/bac_ingredient.gd" id="1_xkt8h"]
+[ext_resource type="PackedScene" uid="uid://dm6huako8k6x4" path="res://entities/items/Fromage.tscn" id="2_cgo0n"]
+[ext_resource type="PackedScene" uid="uid://bf7vbpeo41udl" path="res://assets/fridge_A.fbx" id="3_bb4sj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_40fiq"]
+size = Vector3(2.0603867, 3.21521, 1.8657837)
+
+[node name="BacCheese" type="StaticBody3D" unique_id=1033174506]
+script = ExtResource("1_xkt8h")
+ingredient_scene = ExtResource("2_cgo0n")
+nom_ingredient = "fromage"
+
+[node name="fridge_A" parent="." unique_id=1895233973 instance=ExtResource("3_bb4sj")]
+transform = Transform3D(1, 0, 0, 0, 1.25, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1899673493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5247192, 0)
+shape = SubResource("BoxShape3D_40fiq")

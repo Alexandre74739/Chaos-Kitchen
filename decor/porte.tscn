@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b4cii3xysdkyu"]
+
+[ext_resource type="Script" uid="uid://dq1eqpph42wtc" path="res://scripts/porte.gd" id="1_bbnpi"]
+[ext_resource type="PackedScene" uid="uid://b01jvs1bnpw1a" path="res://assets/door_B.fbx" id="1_mqq5l"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttpdn"]
+radius = 1.6796875
+height = 4.2216797
+
+[node name="porte" type="AnimatableBody3D" unique_id=510018054]
+script = ExtResource("1_bbnpi")
+
+[node name="PivotPorte" type="Node3D" parent="." unique_id=1104465660]
+
+[node name="door_B" parent="PivotPorte" unique_id=1781390396 instance=ExtResource("1_mqq5l")]
+transform = Transform3D(1, 0, 0, 0, 0.82, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ZoneDetection" type="Area3D" parent="." unique_id=1061762655]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZoneDetection" unique_id=636262260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80839694, 1.1475588, 0)
+shape = SubResource("CapsuleShape3D_ttpdn")
+
+[connection signal="body_entered" from="ZoneDetection" to="." method="_on_zone_detection_body_entered"]

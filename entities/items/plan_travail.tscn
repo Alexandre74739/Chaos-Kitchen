@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://webtiyr65b6n"]
+
+[ext_resource type="Script" uid="uid://bhgtgoc55yc7w" path="res://scripts/poste_cuisine.gd" id="1_qb6y3"]
+[ext_resource type="PackedScene" uid="uid://byg1e74s3x431" path="res://assets/food_ingredient_bun_bottom.fbx" id="2_bevl7"]
+[ext_resource type="PackedScene" uid="uid://dl8lvkig8buu5" path="res://assets/kitchentable_A.fbx" id="2_l3dhq"]
+[ext_resource type="PackedScene" uid="uid://di7c1b04q6dlf" path="res://assets/food_ingredient_bun_top.fbx" id="3_shbg1"]
+[ext_resource type="PackedScene" uid="uid://db74e7nq05diy" path="res://assets/food_ingredient_lettuce_slice.fbx" id="4_plpxd"]
+[ext_resource type="PackedScene" uid="uid://bepqupbjaiv18" path="res://assets/food_ingredient_burger_cooked.fbx" id="5_k4hmu"]
+[ext_resource type="PackedScene" uid="uid://fse5a8ojdkd1" path="res://assets/food_ingredient_cheese_slice.fbx" id="6_6g672"]
+[ext_resource type="PackedScene" uid="uid://bu5ufqwm8jv1o" path="res://assets/food_ingredient_tomato_slice.fbx" id="7_3tid2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_46px4"]
+size = Vector3(2.0119019, 1.0711517, 2.534668)
+
+[node name="plan_travail" type="StaticBody3D" unique_id=531940475]
+script = ExtResource("1_qb6y3")
+asset_pain_bas = ExtResource("2_bevl7")
+asset_pain_haut = ExtResource("3_shbg1")
+asset_salade = ExtResource("4_plpxd")
+asset_viande = ExtResource("5_k4hmu")
+asset_fromage = ExtResource("6_6g672")
+asset_tomate = ExtResource("7_3tid2")
+
+[node name="kitchentable_A" parent="." unique_id=1186163816 instance=ExtResource("2_l3dhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.25, 0.673, 0, 0.112)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=12169669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66726685, 0.5150223, 0.11401367)
+shape = SubResource("BoxShape3D_46px4")
+debug_color = Color(0, 0.5950001, 0.7, 1)

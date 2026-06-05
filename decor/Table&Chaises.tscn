@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://clarwacyh6sxa"]
+
+[ext_resource type="PackedScene" uid="uid://c8j1uekqvx21u" path="res://decor/chaise.tscn" id="1_rugdw"]
+[ext_resource type="PackedScene" uid="uid://8c1ddv2bwl44" path="res://decor/table.tscn" id="2_t602x"]
+
+[node name="Table&chaises" type="Node3D" unique_id=1273792177]
+
+[node name="chaise" parent="." unique_id=1005074377 instance=ExtResource("1_rugdw")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0, 0)
+
+[node name="table" parent="." unique_id=1145870556 instance=ExtResource("2_t602x")]
+
+[node name="chaise2" parent="." unique_id=944005619 instance=ExtResource("1_rugdw")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1)
+
+[node name="chaise3" parent="." unique_id=1737283739 instance=ExtResource("1_rugdw")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, 0, 0)
+
+[node name="chaise4" parent="." unique_id=647793270 instance=ExtResource("1_rugdw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
