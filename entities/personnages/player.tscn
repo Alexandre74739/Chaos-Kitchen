@@ -79,7 +79,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7902023, -1.2605565, -0.08
 libraries/ = SubResource("AnimationLibrary_i0ma1")
 
 [node name="Luigi" parent="LeanPivot" unique_id=1924431096 instance=ExtResource("Luigi_glb")]
-transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, 0, -1.2495492, 0)
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, 0, -1.0717094, 0)
 
 [node name="CameraRoot" type="Node3D" parent="." unique_id=690350155]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

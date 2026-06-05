@@ -73,7 +73,7 @@ func jouer_musique(nom: String, volume: float = 0.0):
 	musique_player.volume_db = volume
 	musique_player.play()
 
-# ── Lance l'ambiance en boucle ────────────────────────────
+# ── Lance l'ambiance en boucle infinie ───────────────────
 func jouer_ambiance(nom: String, volume: float = -6.0):
 	if not catalogue.has(nom):
 		push_error("AudioManager : ambiance introuvable → " + nom)
@@ -83,29 +83,22 @@ func jouer_ambiance(nom: String, volume: float = -6.0):
 	if stream == null:
 		return
 
-	# Boucle selon le format
-	if stream is AudioStreamMP3:
-		stream.loop = true
-	elif stream is AudioStreamWAV:
-		stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-	elif stream is AudioStreamOggVorbis:
-		stream.loop = true
+	ambiance_player.stream      = stream
+	ambiance_player.volume_db   = volume
+	ambiance_player.pitch_scale = 1.0
 
-	ambiance_player.stream    = stream
-	ambiance_player.volume_db = volume
+	if not ambiance_player.finished.is_connected(_on_ambiance_finie):
+		ambiance_player.finished.connect(_on_ambiance_finie)
 
-	# Active la boucle sur le stream
-	if stream is AudioStreamMP3:
-		stream.loop = true
-	elif stream is AudioStreamWAV:
-		stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	ambiance_player.play()
 
-	ambiance_player.stream    = stream
-	ambiance_player.volume_db = volume
+func _on_ambiance_finie():
 	ambiance_player.play()
 
 # ── Arrête l'ambiance ─────────────────────────────────────
 func arreter_ambiance():
+	if ambiance_player.finished.is_connected(_on_ambiance_finie):
+		ambiance_player.finished.disconnect(_on_ambiance_finie)
 	ambiance_player.stop()
 
 # ── Arrête la musique principale ──────────────────────────

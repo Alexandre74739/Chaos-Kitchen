@@ -51,38 +51,21 @@ func _physics_process(delta):
 				print("Porte fermée")
 
 func _on_body_entered(body):
-	if body is CharacterBody3D:
-		if etat == EtatPorte.FERMEE:
-			AudioManager.jouer_sfx("porte")
-			etat = EtatPorte.OUVERTURE
-
+	if not body is CharacterBody3D:
+		return
 	joueurs_zone += 1
-
 	if etat == EtatPorte.FERMEE:
-		# Détecte de quel côté arrive le joueur
-		# to_local() convertit la position du joueur en coordonnées locales de la porte
 		var pos_locale = to_local(body.global_position)
-
-		# Si le joueur est du côté positif Z → ouvre dans un sens
-		# Si côté négatif Z → ouvre dans l'autre sens
-		if pos_locale.z > 0:
-			angle_cible = angle_ouverture
-		else:
-			angle_cible = -angle_ouverture
-
+		angle_cible = angle_ouverture if pos_locale.z > 0 else -angle_ouverture
 		timer_ferme = delai_fermeture
+		AudioManager.jouer_sfx("porte")
 		etat = EtatPorte.OUVERTURE
 		print("Porte : ouverture vers " + str(angle_cible) + "°")
 
 func _on_body_exited(body):
 	if not body is CharacterBody3D:
 		return
-	joueurs_zone -= 1
-	# Démarre le timer de fermeture quand le joueur quitte
+	joueurs_zone = max(0, joueurs_zone - 1)
 	if joueurs_zone <= 0:
-		joueurs_zone = 0
 		timer_ferme = delai_fermeture
 		print("Joueur parti — fermeture dans " + str(delai_fermeture) + "s")
-
-func _on_zone_detection_body_entered(body: Node3D) -> void:
-	_on_body_entered(body)
