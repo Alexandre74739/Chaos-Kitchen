@@ -13,6 +13,7 @@ const LEAN_MAX_ANGLE       = 6.0
 @onready var anim             = $LeanPivot/AnimPlayerGodot
 
 var main_droite       : Node3D            = null
+var particules_marche : GPUParticles3D    = null
 var sfx_marche        : AudioStreamPlayer = null
 
 @export var fusil_offset_main : Vector3 = Vector3(0.20, 0.35, 0.0)
@@ -42,6 +43,40 @@ func _ready():
 			anim.play("idle_organic")
 		else:
 			push_error("Animation idle_organic introuvable")
+
+	# ── Particules de pas au sol ─────────────────────────
+	particules_marche = GPUParticles3D.new()
+	add_child(particules_marche)
+	particules_marche.position     = Vector3(0, -1.15, 0)
+	particules_marche.emitting     = false
+	particules_marche.one_shot     = false
+	particules_marche.amount       = 10
+	particules_marche.lifetime     = 0.4
+	particules_marche.local_coords = false
+
+	var mat_m = ParticleProcessMaterial.new()
+	mat_m.emission_shape       = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	mat_m.emission_box_extents = Vector3(0.2, 0.005, 0.2)
+	mat_m.direction            = Vector3(0, 1, 0)
+	mat_m.spread               = 180.0
+	mat_m.initial_velocity_min = 0.1
+	mat_m.initial_velocity_max = 0.45
+	mat_m.gravity              = Vector3(0, -0.2, 0)
+	mat_m.scale_min            = 0.25
+	mat_m.scale_max            = 0.65
+
+	var grad = Gradient.new()
+	grad.set_color(0, Color(0.80, 0.74, 0.62, 0.6))
+	grad.set_color(1, Color(0.80, 0.74, 0.62, 0.0))
+	var ramp = GradientTexture1D.new()
+	ramp.gradient    = grad
+	mat_m.color_ramp = ramp
+	particules_marche.process_material = mat_m
+
+	var mesh_m    = SphereMesh.new()
+	mesh_m.radius = 0.12
+	mesh_m.height = 0.03
+	particules_marche.draw_pass_1 = mesh_m
 
 	# ── Lecteur dédié aux pas en boucle ───────────────────
 	sfx_marche = AudioStreamPlayer.new()
@@ -94,14 +129,16 @@ func _physics_process(delta):
 	velocity.z = direction.z * SPEED
 	move_and_slide()
 
-	# ── Son de marche ────────────────────────────────────
+	# ── Son + poussière de marche ────────────────────────
 	var is_moving = direction.length() > 0.1 and is_on_floor()
 	if is_moving:
 		if not sfx_marche.playing:
 			sfx_marche.play()
+		particules_marche.emitting = true
 	else:
 		if sfx_marche.playing:
 			sfx_marche.stop()
+		particules_marche.emitting = false
 
 	# ── Caméra manette ────────────────────────────────────
 	var joy_x = Input.get_axis("camera_x_left", "camera_x_right")

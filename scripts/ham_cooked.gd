@@ -5,6 +5,8 @@ const HAM_VISUAL = preload("res://assets/food_ingredient_ham_cooked.fbx")
 func _ready():
 	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
 	freeze = false
+	var t = get_tree().create_timer(15.0)
+	t.timeout.connect(queue_free)
 
 func _process(delta):
 	if freeze:
