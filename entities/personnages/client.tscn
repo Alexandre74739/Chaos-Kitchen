@@ -1,16 +1,65 @@
 [gd_scene format=3 uid="uid://bx3w5o2rh7vep"]
 
-[ext_resource type="Script" path="res://scripts/client.gd" id="1_client"]
+[ext_resource type="Script" uid="uid://pk8xbbxs24c7" path="res://scripts/client.gd" id="1_client"]
+[ext_resource type="PackedScene" uid="uid://b2c4e38pwv4e2" path="res://assets/Client.glb" id="2_client_glb"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_client"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_u5d03"]
+radius = 1.1102246
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_client"]
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[node name="Client" type="StaticBody3D"]
+[sub_resource type="Animation" id="Animation_idle_organic"]
+resource_name = "idle_organic"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.05, 0), Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_client"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"idle_organic": SubResource("Animation_idle_organic")
+}
+
+[node name="Client" type="StaticBody3D" unique_id=945728354]
 script = ExtResource("1_client")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_client")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1311356143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8120661, 0)
+shape = SubResource("SphereShape3D_u5d03")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_client")
+[node name="Pivot" type="Node3D" parent="." unique_id=1268599978]
+transform = Transform3D(0.65, 0, 0, 0, 0.6, 0, 0, 0, 0.65, 0, 0, 0)
+
+[node name="AnimPlayerGodot" type="AnimationPlayer" parent="Pivot" unique_id=687921505]
+libraries/ = SubResource("AnimationLibrary_client")
+
+[node name="Client" parent="Pivot" unique_id=331710122 instance=ExtResource("2_client_glb")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="PatienceTimer" type="Timer" parent="." unique_id=477655720]
+wait_time = 45.0
+one_shot = true
