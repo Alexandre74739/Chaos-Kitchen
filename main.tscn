@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bnif6yvqaojvc" path="res://decor/bacViande.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://e61t1uihktfy" path="res://decor/salleViande.tscn" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://clarwacyh6sxa" path="res://decor/Table&Chaises.tscn" id="13_ycdy4"]
+[ext_resource type="PackedScene" path="res://decor/post_process.tscn" id="14_ppfx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -35,14 +36,15 @@ environment = SubResource("Environment_main")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=3]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 6, 0)
-light_energy = 0.4
+visible = false
+light_energy = 0.15
 shadow_enabled = true
 
 [node name="Sol" parent="." unique_id=1218851493 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="Player" parent="." unique_id=1543036325 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 10.891621, 1.542, -4.5664644)
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 7.509755, 1.542, -4.5664644)
 script = ExtResource("2_h2yge")
 
 [node name="Murs" parent="." unique_id=2103636407 instance=ExtResource("4_1bvp3")]
@@ -89,3 +91,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, -7)
 
 [node name="BacCheese" parent="Bacs" unique_id=571082802 instance=ExtResource("8_kek77")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -9.75)
+
+[node name="PostProcess" parent="." unique_id=300000001 instance=ExtResource("14_ppfx")]
