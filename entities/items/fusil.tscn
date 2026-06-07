@@ -1,18 +1,26 @@
 [gd_scene format=3 uid="uid://d3fyewm4x1pjq"]
 
-[ext_resource type="Script" path="res://scripts/fusil.gd" id="1_fusil"]
-[ext_resource type="PackedScene" path="res://assets/knife.fbx" id="2_knife"]
+[ext_resource type="Script" uid="uid://ckydyonq56j70" path="res://scripts/fusil.gd" id="1_fusil"]
+[ext_resource type="PackedScene" uid="uid://ccd5i3upbm5vy" path="res://assets/Fusil.glb" id="2_knife"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_physics"]
+size = Vector3(0.3375, 0.35344237, 2.3600342)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_detect"]
-size = Vector3(1.2, 1.2, 1.2)
+size = Vector3(2.645764, 1.2, 1.2)
 
-[node name="Fusil" type="Node3D"]
+[node name="Fusil" type="RigidBody3D" unique_id=1600312004]
 script = ExtResource("1_fusil")
 
-[node name="KnifeModel" parent="." instance=ExtResource("2_knife")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+[node name="FusilModel" parent="." unique_id=1244649649 instance=ExtResource("2_knife")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.1, 0.5)
 
-[node name="DetectionZone" type="Area3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=804296690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0019764155, 0.10172119, 1.8853209e-08)
+shape = SubResource("BoxShape3D_physics")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionZone"]
+[node name="DetectionZone" type="Area3D" parent="." unique_id=2144164360]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionZone" unique_id=234970869]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.043466926, 0, 0)
 shape = SubResource("BoxShape3D_detect")

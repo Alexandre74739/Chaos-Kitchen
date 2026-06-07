@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://e61t1uihktfy" path="res://decor/salleViande.tscn" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://clarwacyh6sxa" path="res://decor/Table&Chaises.tscn" id="13_ycdy4"]
 [ext_resource type="PackedScene" path="res://decor/post_process.tscn" id="14_ppfx"]
+[ext_resource type="PackedScene" uid="uid://d3fyewm4x1pjq" path="res://entities/items/fusil.tscn" id="15_fusil"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -91,5 +92,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, -7)
 
 [node name="BacCheese" parent="Bacs" unique_id=571082802 instance=ExtResource("8_kek77")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -9.75)
+
+[node name="Fusil" parent="." unique_id=300000002 instance=ExtResource("15_fusil")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.329384, 0.5, -9.103743)
 
 [node name="PostProcess" parent="." unique_id=300000001 instance=ExtResource("14_ppfx")]

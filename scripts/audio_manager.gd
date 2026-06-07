@@ -16,6 +16,7 @@ var catalogue : Dictionary = {
 	"marche"             : "res://audio/sfx/marche.mp3",
 	"prendre_ingredient" : "res://audio/sfx/prendre_ingredient.mp3",
 	"poser_ingredient"   : "res://audio/sfx/poser_ingredient.mp3",
+	"tir"                : "res://audio/sfx/tir.mp3",
 }
 
 func _ready():

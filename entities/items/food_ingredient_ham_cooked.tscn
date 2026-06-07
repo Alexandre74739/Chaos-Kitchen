@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c8qhamcookd4x"]
+
+[ext_resource type="Script" uid="uid://dw75p2g6n6yb4" path="res://scripts/ham_cooked.gd" id="1_ham"]
+[ext_resource type="PackedScene" uid="uid://bbsw4ftmw5sn" path="res://assets/food_ingredient_ham_cooked.fbx" id="2_ham"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_col"]
+radius = 0.5322326
+
+[node name="HamCooked" type="RigidBody3D" unique_id=2100571524]
+script = ExtResource("1_ham")
+
+[node name="HamModel" parent="." unique_id=2112222895 instance=ExtResource("2_ham")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1645065778]
+shape = SubResource("SphereShape3D_col")

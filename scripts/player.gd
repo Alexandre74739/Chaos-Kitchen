@@ -16,10 +16,14 @@ var main_droite : Node3D          = null
 var particules  : GPUParticles3D  = null
 var sfx_marche  : AudioStreamPlayer = null
 
+@export var fusil_offset_main : Vector3 = Vector3(0.20, 0.35, 0.0)
+
 var camera_angle        = 0.0
 var nearby_interactable = null
 var ingredient_en_main  = null
 var nom_ingredient_tenu = ""
+var fusil_en_main       = false
+var fusil_instance      = null
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -87,8 +91,10 @@ func _input(event):
 
 	# ── Interaction ───────────────────────────────────────
 	if event.is_action_pressed("interact"):
-		if nearby_interactable != null:
+		if nearby_interactable != null and nearby_interactable != fusil_instance:
 			nearby_interactable.interact(self)
+		elif fusil_en_main:
+			deposer_fusil()
 
 	# ── Libère la souris ──────────────────────────────────
 	if event.is_action_pressed("ui_cancel"):
@@ -150,6 +156,27 @@ func _physics_process(delta):
 			if anim.current_animation != "idle_organic":
 				anim.play("idle_organic")
 
+	# ── Fusil suit la main ────────────────────────────────
+	if fusil_en_main and fusil_instance != null:
+		var camera = $CameraRoot/SpringArm3D/Camera3D
+		var base = global_transform.basis.orthonormalized()
+		var offset = base.x * fusil_offset_main.x \
+			+ Vector3.UP * fusil_offset_main.y \
+			+ base.z * fusil_offset_main.z
+		fusil_instance.global_position = main_droite.global_position + offset
+		fusil_instance.global_rotation = camera.global_rotation
+
+	# ── Détection de secours (corps déjà dans la zone) ────
+	if nearby_interactable == null:
+		for body in interaction_zone.get_overlapping_bodies():
+			if body.has_method("interact") and body != fusil_instance:
+				nearby_interactable = body
+				break
+
+	# ── Tir (une seule fois par pression, souris et manette) ─
+	if Input.is_action_just_pressed("tirer") and fusil_en_main:
+		_tirer()
+
 	# ── Inclinaison ───────────────────────────────────────
 	_appliquer_inclinaison(direction, delta)
 
@@ -174,10 +201,15 @@ func tient_ingredient() -> bool:
 	return ingredient_en_main != null
 
 func prendre_ingredient(ingredient, nom):
+	if fusil_en_main:
+		deposer_fusil()
 	ingredient_en_main  = ingredient
 	nom_ingredient_tenu = nom
 	if main_droite != null:
-		main_droite.add_child(ingredient)
+		if ingredient.get_parent() != null:
+			ingredient.reparent(main_droite)
+		else:
+			main_droite.add_child(ingredient)
 		ingredient.position = Vector3.ZERO
 	print("En main : " + nom)
 
@@ -188,6 +220,34 @@ func deposer_ingredient():
 	ingredient_en_main = null
 	nom_ingredient_tenu = ""
 	return null
+
+# ── Gestion fusil ─────────────────────────────────────────
+func prendre_fusil(fusil):
+	if ingredient_en_main != null:
+		deposer_ingredient()
+	fusil_en_main = true
+	fusil_instance = fusil
+	print("Fusil en main")
+
+func deposer_fusil():
+	if not fusil_en_main:
+		return
+	fusil_en_main = false
+	fusil_instance.etre_pose(self)
+	fusil_instance = null
+	print("Fusil posé")
+
+func _tirer():
+	AudioManager.jouer_sfx("tir")
+	var camera = $CameraRoot/SpringArm3D/Camera3D
+	var from = camera.global_position
+	var dir  = -camera.global_transform.basis.z
+	var to   = from + dir * 30.0
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [get_rid()]
+	var result = get_world_3d().direct_space_state.intersect_ray(query)
+	if result and result["collider"].has_method("mourir"):
+		result["collider"].mourir()
 
 # ── Détection proximité ───────────────────────────────────
 func _on_body_entered(body):
