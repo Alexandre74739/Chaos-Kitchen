@@ -94,6 +94,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, -7)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0.5, -9.75)
 
 [node name="Fusil" parent="." unique_id=300000002 instance=ExtResource("15_fusil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.329384, 0.5, -9.103743)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9135685, 0.5, -21.617325)
 
 [node name="PostProcess" parent="." unique_id=300000001 instance=ExtResource("14_ppfx")]

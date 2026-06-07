@@ -12,9 +12,8 @@ const LEAN_MAX_ANGLE       = 6.0
 @onready var lean_pivot       = $LeanPivot
 @onready var anim             = $LeanPivot/AnimPlayerGodot
 
-var main_droite : Node3D          = null
-var particules  : GPUParticles3D  = null
-var sfx_marche  : AudioStreamPlayer = null
+var main_droite       : Node3D            = null
+var sfx_marche        : AudioStreamPlayer = null
 
 @export var fusil_offset_main : Vector3 = Vector3(0.20, 0.35, 0.0)
 
@@ -43,32 +42,6 @@ func _ready():
 			anim.play("idle_organic")
 		else:
 			push_error("Animation idle_organic introuvable")
-
-	# ── Crée les particules d'atterrissage ────────────────
-	particules = GPUParticles3D.new()
-	add_child(particules)
-	particules.position      = Vector3(0, 0.05, 0)
-	particules.emitting      = false
-	particules.one_shot      = true
-	particules.explosiveness = 0.9
-	particules.amount        = 12
-
-	var mat = ParticleProcessMaterial.new()
-	mat.emission_shape         = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
-	mat.emission_sphere_radius = 0.2
-	mat.direction              = Vector3(0, 1, 0)
-	mat.spread                 = 60.0
-	mat.initial_velocity_min   = 1.0
-	mat.initial_velocity_max   = 2.5
-	mat.gravity                = Vector3(0, -6, 0)
-	mat.scale_min              = 0.05
-	mat.scale_max              = 0.15
-	particules.process_material = mat
-
-	var mesh_part    = SphereMesh.new()
-	mesh_part.radius = 0.05
-	mesh_part.height = 0.1
-	particules.draw_pass_1 = mesh_part
 
 	# ── Lecteur dédié aux pas en boucle ───────────────────
 	sfx_marche = AudioStreamPlayer.new()
@@ -101,8 +74,6 @@ func _input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _physics_process(delta):
-	var etait_en_air = not is_on_floor()
-
 	# ── Gravité ───────────────────────────────────────────
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
@@ -123,7 +94,7 @@ func _physics_process(delta):
 	velocity.z = direction.z * SPEED
 	move_and_slide()
 
-	# ── Son de marche en boucle ───────────────────────────
+	# ── Son de marche ────────────────────────────────────
 	var is_moving = direction.length() > 0.1 and is_on_floor()
 	if is_moving:
 		if not sfx_marche.playing:
@@ -131,11 +102,6 @@ func _physics_process(delta):
 	else:
 		if sfx_marche.playing:
 			sfx_marche.stop()
-
-	# ── Particules à l'atterrissage ───────────────────────
-	if etait_en_air and is_on_floor():
-		particules.restart()
-		particules.emitting = true
 
 	# ── Caméra manette ────────────────────────────────────
 	var joy_x = Input.get_axis("camera_x_left", "camera_x_right")
