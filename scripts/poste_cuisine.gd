@@ -82,9 +82,10 @@ func _poser_ingredient(nom: String, joueur):
 
 # ── Donne le burger entier au joueur ──────────────────────
 func _donner_burger_au_joueur(joueur):
-	if joueur.tient_ingredient():
-		print("Les mains sont pleines !")
-		return
+	if joueur.fusil_en_main:
+		joueur.deposer_fusil()
+	elif joueur.tient_ingredient():
+		joueur.deposer_ingredient()
 
 	remove_child(burger_node)
 	joueur.prendre_ingredient(burger_node, "burger")

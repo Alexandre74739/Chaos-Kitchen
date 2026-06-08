@@ -10,7 +10,7 @@ var nb_sfx_players   : int = 8  # pool de lecteurs simultanés
 var catalogue : Dictionary = {
 	# Musiques
 	"intro"              : "res://audio/musique/intro.mp3",
-	"ambiance"           : "res://audio/musique/ambiance.wav",
+	"ambiance"           : "res://audio/musique/ambiance.WAV",
 	# Effets
 	"porte"              : "res://audio/sfx/porte.mp3",
 	"marche"             : "res://audio/sfx/marche.mp3",
