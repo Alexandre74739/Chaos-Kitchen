@@ -1,25 +1,32 @@
 extends Node3D
 
-const CLIENT_SCENE       = preload("res://entities/personnages/client.tscn")
-const SCORE_UI_SCRIPT    = preload("res://scripts/score_ui.gd")
+const CLIENT_SCENE        = preload("res://entities/personnages/client.tscn")
+const SCORE_UI_SCRIPT     = preload("res://scripts/score_ui.gd")
+const PAUSE_MENU_SCRIPT   = preload("res://scripts/pause_menu.gd")
+const GAME_OVER_SCRIPT    = preload("res://scripts/game_over.gd")
 
-const SPAWN_MIN          = 15.0
-const SPAWN_MAX          = 30.0
-const MIN_CLIENTS        = 2
-const MAX_CLIENTS        = 8
-const DELAI_REMPLACEMENT = 4.0
+const SPAWN_MIN           = 15.0
+const SPAWN_MAX           = 30.0
+const MIN_CLIENTS         = 2
+const MAX_CLIENTS         = 8
+const DELAI_REMPLACEMENT  = 4.0
+const SEUIL_DEFAITE       = -500
 
-var chaises     : Array = []
-var timer_spawn : Timer
-var nb_clients  : int   = 0
-var score       : int   = 0
-var score_ui    : Node  = null
+var chaises          : Array = []
+var timer_spawn      : Timer
+var nb_clients       : int   = 0
+var score            : int   = 0
+var score_ui         : Node  = null
+var pause_menu       : Node  = null
+var game_over_screen : Node  = null
 
 func _ready() -> void:
 	AudioManager.jouer_ambiance("ambiance")
 	_collecter_chaises()
 	_lancer_timer_spawn()
 	_creer_score_ui()
+	_creer_pause_menu()
+	_creer_game_over()
 	for i in range(MIN_CLIENTS):
 		_spawner_client()
 
@@ -29,6 +36,20 @@ func _creer_score_ui() -> void:
 	canvas.set_script(SCORE_UI_SCRIPT)
 	add_child(canvas)
 	score_ui = canvas
+
+# ── Menu Pause ────────────────────────────────────────────────
+func _creer_pause_menu() -> void:
+	var canvas = CanvasLayer.new()
+	canvas.set_script(PAUSE_MENU_SCRIPT)
+	add_child(canvas)
+	pause_menu = canvas
+
+# ── Écran Game Over ───────────────────────────────────────────
+func _creer_game_over() -> void:
+	var canvas = CanvasLayer.new()
+	canvas.set_script(GAME_OVER_SCRIPT)
+	add_child(canvas)
+	game_over_screen = canvas
 
 # ── Collecte toutes les positions de chaises dans la salle ───
 func _collecter_chaises() -> void:
@@ -112,6 +133,13 @@ func _modifier_score(delta: int) -> void:
 	score += delta
 	if score_ui != null:
 		score_ui.mettre_a_jour(score, delta)
+	if score < SEUIL_DEFAITE:
+		_declencher_defaite()
+
+func _declencher_defaite() -> void:
+	timer_spawn.stop()
+	if game_over_screen != null:
+		game_over_screen.afficher(score)
 
 # ── Remplace si en-dessous du minimum ────────────────────────
 func _verifier_remplacement() -> void:

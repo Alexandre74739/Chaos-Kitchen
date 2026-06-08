@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const SPEED                = 5.0
 const GRAVITY              = -9.8
-const MOUSE_SENSITIVITY    = 0.003
+var   mouse_sensitivity    := 0.003
 const JOYSTICK_SENSITIVITY = 0.05
 const LEAN_SPEED           = 8.0
 const LEAN_MAX_ANGLE       = 6.0
@@ -92,8 +92,8 @@ func _ready():
 func _input(event):
 	# ── Rotation caméra souris ────────────────────────────
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
-		camera_angle -= event.relative.y * MOUSE_SENSITIVITY
+		rotate_y(-event.relative.x * mouse_sensitivity)
+		camera_angle -= event.relative.y * mouse_sensitivity
 		camera_angle = clamp(camera_angle, -0.5, 0.3)
 		spring_arm.rotation.x = camera_angle
 
@@ -103,10 +103,6 @@ func _input(event):
 			nearby_interactable.interact(self)
 		elif fusil_en_main:
 			deposer_fusil()
-
-	# ── Libère la souris ──────────────────────────────────
-	if event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _physics_process(delta):
 	# ── Gravité ───────────────────────────────────────────
