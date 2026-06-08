@@ -88,6 +88,7 @@ func _donner_burger_au_joueur(joueur):
 		joueur.deposer_ingredient()
 
 	remove_child(burger_node)
+	burger_node.set_meta("ingredients", ingredients_poses.duplicate())
 	joueur.prendre_ingredient(burger_node, "burger")
 	print("Burger pris en main !")
 

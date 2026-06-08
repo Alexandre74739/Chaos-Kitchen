@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bnif6yvqaojvc" path="res://decor/bacViande.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://e61t1uihktfy" path="res://decor/salleViande.tscn" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://clarwacyh6sxa" path="res://decor/Table&Chaises.tscn" id="13_ycdy4"]
-[ext_resource type="PackedScene" path="res://decor/post_process.tscn" id="14_ppfx"]
+[ext_resource type="PackedScene" uid="uid://dbwem3nbmebwu" path="res://decor/post_process.tscn" id="14_ppfx"]
 [ext_resource type="PackedScene" uid="uid://d3fyewm4x1pjq" path="res://entities/items/fusil.tscn" id="15_fusil"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
@@ -34,12 +34,6 @@ script = ExtResource("1_w48qg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2]
 environment = SubResource("Environment_main")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=3]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 6, 0)
-visible = false
-light_energy = 0.15
-shadow_enabled = true
 
 [node name="Sol" parent="." unique_id=1218851493 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
