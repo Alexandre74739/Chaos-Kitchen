@@ -1,15 +1,7 @@
 extends Node3D
 
-const FONT              = preload("res://assets/fonts/MatchaCih.ttf")
-const SOL_SCENE         = preload("res://decor/sol.tscn")
-const DECO_SCENE        = preload("res://decor/cuisineDecoAngle.tscn")
-const LUIGI_GLB         = preload("res://assets/Luigi.glb")
-const PLAN_SCENE        = preload("res://entities/items/plan_travail.tscn")
-const BAC_PAIN_SCENE    = preload("res://decor/bacPain.tscn")
-const BAC_TOMATE_SCENE  = preload("res://decor/bacTomate.tscn")
-const BAC_VIANDE_SCENE  = preload("res://decor/bacViande.tscn")
-const FRIDGE_SCENE      = preload("res://assets/fridge_A.fbx")
-const TABLE_SCENE       = preload("res://assets/kitchentable_A_large.fbx")
+const FONT       = preload("res://assets/fonts/MatchaCih.ttf")
+const MAIN_SCENE = preload("res://main.tscn")
 
 const C_BG    := Color(0.05, 0.05, 0.18, 0.96)
 const C_OR    := Color(1.0,  0.72, 0.0,  1.0)
@@ -23,11 +15,13 @@ var _sous_panel        : Control         = null
 var _btn_jouer         : Button          = null
 var _btn_overlay_focus : Control         = null
 var _scroll_actif      : ScrollContainer = null
+var _panneau_gauche    : Control         = null
+var _cam               : Camera3D        = null
+var _cam_end_transform : Transform3D
 
 func _process(delta: float) -> void:
 	if _scroll_actif == null or not _scroll_actif.is_inside_tree():
 		return
-	# Ne pas scroller quand un slider a le focus (le D-pad ajuste sa valeur)
 	if get_viewport().gui_get_focus_owner() is HSlider:
 		return
 	var axis : float = Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
@@ -42,168 +36,56 @@ func _process(delta: float) -> void:
 
 
 func _ready() -> void:
+	_setup_backdrop()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	_setup_world()
-	_setup_player()
 	_setup_camera()
 	_setup_ui()
 
-# ── MONDE 3D ──────────────────────────────────────────────────────
 
-func _setup_world() -> void:
-	var sky_mat = ProceduralSkyMaterial.new()
-	sky_mat.sky_top_color        = Color(0.28, 0.16, 0.07)
-	sky_mat.sky_horizon_color    = Color(0.62, 0.42, 0.18)
-	sky_mat.ground_horizon_color = Color(0.62, 0.42, 0.18)
-	sky_mat.ground_bottom_color  = Color(0.12, 0.08, 0.04)
-	var sky = Sky.new()
-	sky.sky_material = sky_mat
-	var env = Environment.new()
-	env.background_mode      = Environment.BG_SKY
-	env.sky                  = sky
-	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	env.ambient_light_energy = 0.75
-	env.tonemap_mode         = Environment.TONE_MAPPER_ACES
-	var we = WorldEnvironment.new()
-	we.environment = env
-	add_child(we)
+# ── BACKDROP : scène de jeu sans logique ──────────────────────────
 
-	var sun = DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-48.0, 28.0, 0.0)
-	sun.light_color      = Color(1.0, 0.94, 0.80)
-	sun.light_energy     = 1.5
-	sun.shadow_enabled   = false
-	add_child(sun)
+func _setup_backdrop() -> void:
+	var world = MAIN_SCENE.instantiate()
+	world.set_script(null)
+	var player_node = world.get_node_or_null("Player")
+	if player_node:
+		player_node.set_script(null)
+	add_child(world)
 
-	var omni = OmniLight3D.new()
-	omni.position     = Vector3(2.0, 5.0, 1.5)
-	omni.light_color  = Color(1.0, 0.92, 0.72)
-	omni.light_energy = 2.5
-	omni.omni_range   = 18.0
-	add_child(omni)
-
-	var omni2 = OmniLight3D.new()
-	omni2.position     = Vector3(-3.0, 4.0, 4.0)
-	omni2.light_color  = Color(0.85, 0.90, 1.0)
-	omni2.light_energy = 0.9
-	omni2.omni_range   = 12.0
-	add_child(omni2)
-
-	# Murs de fond et latéral
-	var wall_mat = StandardMaterial3D.new()
-	wall_mat.albedo_color = Color(0.88, 0.82, 0.70, 1.0)
-	wall_mat.roughness    = 0.88
-
-	var wall_back = MeshInstance3D.new()
-	var back_mesh = PlaneMesh.new()
-	back_mesh.size        = Vector2(22.0, 7.5)
-	back_mesh.orientation = PlaneMesh.FACE_Z
-	wall_back.mesh              = back_mesh
-	wall_back.material_override = wall_mat
-	wall_back.position          = Vector3(2.0, 3.0, -5.5)
-	add_child(wall_back)
-
-	var wall_left = MeshInstance3D.new()
-	var left_mesh = PlaneMesh.new()
-	left_mesh.size        = Vector2(10.0, 7.5)
-	left_mesh.orientation = PlaneMesh.FACE_X
-	wall_left.mesh              = left_mesh
-	wall_left.material_override = wall_mat
-	wall_left.position          = Vector3(-5.5, 3.0, 0.0)
-	add_child(wall_left)
-
-	# Sol
-	var sol = SOL_SCENE.instantiate()
-	sol.rotation_degrees.y = 90.0
-	sol.position           = Vector3(2.0, 0.0, 0.0)
-	add_child(sol)
-
-	# Coin cuisine (comptoirs, plaque, hotte, évier) — fond gauche
-	var deco = DECO_SCENE.instantiate()
-	deco.position = Vector3(-3.5, 0.0, -4.0)
-	add_child(deco)
-
-	# Réfrigérateur contre le mur gauche — bien visible depuis la caméra
-	var fridge = FRIDGE_SCENE.instantiate()
-	fridge.position           = Vector3(-4.5, 0.0, -2.5)
-	fridge.rotation_degrees.y = 90.0
-	add_child(fridge)
-
-	# Grande table de cuisine — arrière droit
-	var table = TABLE_SCENE.instantiate()
-	table.position = Vector3(5.0, 0.0, -3.0)
-	add_child(table)
-
-	# Plan de travail — juste derrière le player, au centre
-	var plan = PLAN_SCENE.instantiate()
-	plan.position = Vector3(1.5, 0.0, -2.0)
-	add_child(plan)
-
-	# Bacs d'ingrédients — sur le plan de travail et aux alentours
-	var bac_pain = BAC_PAIN_SCENE.instantiate()
-	bac_pain.position = Vector3(0.5, 0.5, -3.0)
-	add_child(bac_pain)
-
-	var bac_tomate = BAC_TOMATE_SCENE.instantiate()
-	bac_tomate.position = Vector3(2.5, 0.5, -3.5)
-	add_child(bac_tomate)
-
-	var bac_viande = BAC_VIANDE_SCENE.instantiate()
-	bac_viande.position = Vector3(-0.8, 0.5, -3.2)
-	add_child(bac_viande)
+	var anim = world.get_node_or_null("Player/LeanPivot/AnimPlayerGodot")
+	if anim:
+		anim.play("idle_organic")
 
 
-func _setup_player() -> void:
-	var pivot = Node3D.new()
-	pivot.name       = "PlayerDisplay"
-	pivot.position   = Vector3(3.2, 0.0, 0.5)
-	pivot.rotation.y = PI + 0.30
-	add_child(pivot)
-
-	var luigi = LUIGI_GLB.instantiate()
-	luigi.scale = Vector3(0.62, 0.62, 0.62)
-	luigi.transform.basis = Basis(
-		Vector3(-4.3711392e-08, 0.0, 1.0),
-		Vector3(0.0,            1.0, 0.0),
-		Vector3(-1.0,           0.0, -4.3711392e-08)
-	)
-	luigi.position = Vector3(0.0, -0.4823, 0.0)
-	pivot.add_child(luigi)
-
-	var lib   = AnimationLibrary.new()
-	var reset = Animation.new()
-	reset.length = 0.001
-	var tr = reset.add_track(Animation.TYPE_VALUE)
-	reset.track_set_path(tr, NodePath(".:position"))
-	reset.track_insert_key(tr, 0.0, Vector3.ZERO)
-	lib.add_animation("RESET", reset)
-
-	var idle = Animation.new()
-	idle.resource_name = "idle_organic"
-	idle.length        = 2.0
-	idle.loop_mode     = Animation.LOOP_LINEAR
-	var ti = idle.add_track(Animation.TYPE_VALUE)
-	idle.track_set_path(ti, NodePath(".:position"))
-	idle.track_set_interpolation_type(ti, Animation.INTERPOLATION_LINEAR)
-	idle.track_insert_key(ti, 0.0, Vector3(0.0, 0.0,  0.0))
-	idle.track_insert_key(ti, 0.5, Vector3(0.0, 0.05, 0.0))
-	idle.track_insert_key(ti, 1.0, Vector3(0.0, 0.0,  0.0))
-	idle.track_insert_key(ti, 1.5, Vector3(0.0, 0.10, 0.0))
-	idle.track_insert_key(ti, 2.0, Vector3(0.0, 0.0,  0.0))
-	lib.add_animation("idle_organic", idle)
-
-	var ap = AnimationPlayer.new()
-	ap.add_animation_library("", lib)
-	pivot.add_child(ap)
-	ap.play("idle_organic")
-
+# ── CAMÉRA MENU ───────────────────────────────────────────────────
+# Player en (7.51, 1.54, -4.57) dans main.tscn, face à -Z (cuisine).
+# Vue 3/4 depuis la GAUCHE (-X) et légèrement devant (-Z) :
+#   player apparaît sur la DROITE du cadre → panel UI à droite.
 
 func _setup_camera() -> void:
-	var cam = Camera3D.new()
-	cam.fov      = 52.0
-	cam.position = Vector3(-2.0, 2.0, 7.5)
-	add_child(cam)
-	cam.look_at(Vector3(3.0, 1.1, 0.2), Vector3.UP)
+	# Désactive la caméra du joueur si elle est devenue active
+	for child in get_children():
+		var pc = child.get_node_or_null("Player/CameraRoot/SpringArm3D/Camera3D")
+		if pc:
+			pc.current = false
+			break
+
+	# Vue de face, proche : caméra en Z négatif (devant le player qui regarde -Z),
+	# légèrement décalée en X pour éviter les murs de cuisine.
+	_cam          = Camera3D.new()
+	_cam.fov      = 50.0
+	_cam.position = Vector3(8, 2.5, -8.0)
+	add_child(_cam)
+	_cam.look_at(Vector3(7.51, 1.8, -4.57), Vector3.UP)
+	_cam.current = true
+
+	# Pré-calcul de la transform de fin (vue derrière/dessus le joueur)
+	var helper = Camera3D.new()
+	helper.position = Vector3(7.51, 4.5, 0.5)
+	add_child(helper)
+	helper.look_at(Vector3(7.51, 1.5, -4.57), Vector3.UP)
+	_cam_end_transform = helper.global_transform
+	helper.queue_free()
 
 
 # ── UI ────────────────────────────────────────────────────────────
@@ -226,7 +108,6 @@ func _setup_ui() -> void:
 	_sous_panel.visible = false
 	root.add_child(_sous_panel)
 
-	# Focus initial sur JOUER (pour navigation manette)
 	if _btn_jouer:
 		_btn_jouer.call_deferred("grab_focus")
 
@@ -235,13 +116,15 @@ func _creer_panneau_gauche() -> Control:
 	var f = get_viewport().get_visible_rect().size.y / 1080.0
 
 	var panel = PanelContainer.new()
-	panel.anchor_right  = 0.33
+	_panneau_gauche     = panel
+	panel.anchor_left   = 0.67
+	panel.anchor_right  = 1.0
 	panel.anchor_bottom = 1.0
 
 	var sty = StyleBoxFlat.new()
-	sty.bg_color           = C_BG
-	sty.border_color       = C_OR
-	sty.border_width_right = 5
+	sty.bg_color          = C_BG
+	sty.border_color      = C_OR
+	sty.border_width_left = 5
 	sty.content_margin_left   = int(44 * f)
 	sty.content_margin_right  = int(44 * f)
 	sty.content_margin_top    = int(60 * f)
@@ -270,12 +153,11 @@ func _creer_panneau_gauche() -> Control:
 		var b = _btn(row[0], f, false)
 		b.pressed.connect(row[1])
 		vbox.add_child(b)
-		
+
 	var btn_quitter = _btn("QUITTER", f, false)
 	btn_quitter.pressed.connect(_on_quitter)
 	vbox.add_child(btn_quitter)
 
-	# Hint manette
 	var hint = _lbl("Manette : D-Pad naviguer  ·  A/Croix sélectionner",
 		int(18 * f), Color(0.75, 0.75, 0.60, 0.75), 3)
 	vbox.add_child(hint)
@@ -286,6 +168,44 @@ func _creer_panneau_gauche() -> Control:
 # ── Actions ───────────────────────────────────────────────────────
 
 func _on_jouer() -> void:
+	if _btn_jouer:
+		_btn_jouer.disabled = true
+
+	var tween = create_tween()
+	tween.set_parallel(true)
+
+	# Fondu sortant du panneau
+	if _panneau_gauche:
+		tween.tween_property(_panneau_gauche, "modulate:a", 0.0, 0.8) \
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	# Animation FOV
+	tween.tween_property(_cam, "fov", 52.0, 3.5) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	# Animation de la transform caméra
+	var t0 := _cam.global_transform
+	var t1 := _cam_end_transform
+	tween.tween_method(
+		func(v: float) -> void:
+			_cam.global_transform = t0.interpolate_with(t1, v),
+		0.0, 1.0, 3.5
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await tween.finished
+
+	# Fondu au noir pour masquer le saut de caméra au changement de scène
+	var fade_layer = CanvasLayer.new()
+	fade_layer.layer = 100
+	add_child(fade_layer)
+	var rect = ColorRect.new()
+	rect.color = Color(0, 0, 0, 0)
+	rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	fade_layer.add_child(rect)
+	var fade = create_tween()
+	fade.tween_property(rect, "color:a", 1.0, 0.35)
+	await fade.finished
+
 	get_tree().change_scene_to_file("res://main.tscn")
 
 func _on_regles() -> void:
@@ -296,7 +216,7 @@ func _on_parametres() -> void:
 
 func _on_credits() -> void:
 	_afficher_sous_panel(_construire_credits())
-	
+
 func _on_quitter() -> void:
 	get_tree().quit()
 
@@ -319,9 +239,6 @@ func _fermer_sous_panel() -> void:
 
 
 # ── Fabrique panneau centré avec scroll ───────────────────────────
-# Retourne [fond_global, outer_vbox, scroll_vbox]
-# outer_vbox  = conteneur principal du panneau (titre, bouton fermer vont ici)
-# scroll_vbox = conteneur à l'intérieur du ScrollContainer (contenu scrollable)
 
 func _creer_panneau_overlay(largeur_px: int, f: float) -> Array:
 	var fond = ColorRect.new()
@@ -374,17 +291,15 @@ func _creer_panneau_overlay(largeur_px: int, f: float) -> Array:
 func _construire_regles() -> Control:
 	var f    = get_viewport().get_visible_rect().size.y / 1080.0
 	var base = _creer_panneau_overlay(920, f)
-	var fond       : Control       = base[0]
-	var outer      : VBoxContainer = base[1]
-	var vbox       : VBoxContainer = base[2]
+	var fond       : Control         = base[0]
+	var outer      : VBoxContainer   = base[1]
+	var vbox       : VBoxContainer   = base[2]
 	var scroll     : ScrollContainer = base[3]
 
-	# Titre (fixe, hors scroll)
 	outer.add_child(_lbl("RÈGLES", int(72 * f), C_OR, 10))
 	outer.add_child(_sep(f))
 	outer.add_child(scroll)
 
-	# ── Contenu scrollable ────────────────────────────────
 	vbox.add_child(_entete("OBJECTIF", f))
 	vbox.add_child(_corps("Prépare et livre des burgers aux clients avant\nqu'ils perdent patience !", f))
 	vbox.add_child(_sep(f))
@@ -440,7 +355,6 @@ func _construire_regles() -> Control:
 		"Game Over si score ≤ −500\n" +
 		"Game Over si 5 clients perdent patience", f))
 
-	# Bouton FERMER (fixe, hors scroll)
 	outer.add_child(_sep(f))
 	var btn = _btn("FERMER", f, false)
 	btn.pressed.connect(_fermer_sous_panel)
@@ -456,10 +370,10 @@ func _construire_regles() -> Control:
 func _construire_parametres() -> Control:
 	var f    = get_viewport().get_visible_rect().size.y / 1080.0
 	var base = _creer_panneau_overlay(700, f)
-	var fond   : Control          = base[0]
-	var outer  : VBoxContainer    = base[1]
-	var vbox   : VBoxContainer    = base[2]
-	var scroll : ScrollContainer  = base[3]
+	var fond   : Control         = base[0]
+	var outer  : VBoxContainer   = base[1]
+	var vbox   : VBoxContainer   = base[2]
+	var scroll : ScrollContainer = base[3]
 
 	outer.add_child(_lbl("PARAMÈTRES", int(72 * f), C_OR, 10))
 	outer.add_child(_lbl("Régle l'audio et la sensibilité de la caméra",
@@ -467,7 +381,6 @@ func _construire_parametres() -> Control:
 	outer.add_child(_sep(f))
 	outer.add_child(scroll)
 
-	# Volume
 	vbox.add_child(_entete("Volume", f))
 	var init_vol = _db_to_pct(AudioServer.get_bus_volume_db(0))
 	var row_v    = _creer_row_slider(0.0, 100.0, 1.0, init_vol, f)
@@ -481,7 +394,6 @@ func _construire_parametres() -> Control:
 	vbox.add_child(row_v[2])
 	vbox.add_child(_sep(f))
 
-	# Sensibilité souris
 	vbox.add_child(_entete("Sensibilité souris", f))
 	var init_sens = BestScore.get_sensitivity()
 	var row_s     = _creer_row_slider(1.0, 10.0, 0.5, init_sens, f)
@@ -498,10 +410,9 @@ func _construire_parametres() -> Control:
 	var btn = _btn("FERMER", f, false)
 	btn.pressed.connect(_fermer_sous_panel)
 	outer.add_child(btn)
-	_btn_overlay_focus = sl_v  # focus sur le 1er slider à l'ouverture
+	_btn_overlay_focus = sl_v
 	_scroll_actif      = base[3]
 
-	# Navigation D-pad entre sliders et bouton FERMER (configurée après entrée en scène)
 	fond.ready.connect(func():
 		sl_v.focus_neighbor_bottom = sl_v.get_path_to(sl_s)
 		sl_v.focus_neighbor_top    = sl_v.get_path_to(btn)
@@ -675,9 +586,9 @@ func _creer_row_slider(min_v: float, max_v: float, step: float, init: float, f: 
 	fill.content_margin_bottom      = int(8 * f)
 	slider.add_theme_stylebox_override("grabber_area",           fill)
 	slider.add_theme_stylebox_override("grabber_area_highlight", fill)
-	slider.add_theme_icon_override("grabber",           _rond(int(22 * f), Color(1, 1, 1)))
-	slider.add_theme_icon_override("grabber_highlight",  _rond(int(26 * f), Color(1.0, 0.9, 0.4)))
-	slider.add_theme_icon_override("grabber_disabled",   _rond(int(22 * f), Color(0.5, 0.5, 0.5)))
+	slider.add_theme_icon_override("grabber",          _rond(int(22 * f), Color(1, 1, 1)))
+	slider.add_theme_icon_override("grabber_highlight", _rond(int(26 * f), Color(1.0, 0.9, 0.4)))
+	slider.add_theme_icon_override("grabber_disabled",  _rond(int(22 * f), Color(0.5, 0.5, 0.5)))
 	hbox.add_child(slider)
 
 	var lbl = Label.new()
