@@ -127,8 +127,19 @@ func _construire_ui() -> void:
 	vbox.add_child(_btn_reprendre)
 
 	var btn_q = _creer_bouton("Quitter", f)
+	btn_q.focus_mode = Control.FOCUS_ALL
 	btn_q.pressed.connect(_quitter)
 	vbox.add_child(btn_q)
+
+	# Navigation D-pad : sensibilité ↕ volume ↕ reprendre ↕ quitter (boucle)
+	_slider_sensibilite.focus_neighbor_top    = _slider_sensibilite.get_path_to(btn_q)
+	_slider_sensibilite.focus_neighbor_bottom = _slider_sensibilite.get_path_to(_slider_volume)
+	_slider_volume.focus_neighbor_top         = _slider_volume.get_path_to(_slider_sensibilite)
+	_slider_volume.focus_neighbor_bottom      = _slider_volume.get_path_to(_btn_reprendre)
+	_btn_reprendre.focus_neighbor_top         = _btn_reprendre.get_path_to(_slider_volume)
+	_btn_reprendre.focus_neighbor_bottom      = _btn_reprendre.get_path_to(btn_q)
+	btn_q.focus_neighbor_top                  = btn_q.get_path_to(_btn_reprendre)
+	btn_q.focus_neighbor_bottom               = btn_q.get_path_to(_slider_sensibilite)
 
 # ── Ligne slider + valeur ─────────────────────────────────────
 func _creer_row_slider(min_v: float, max_v: float, step: float, init: float, f: float) -> Array:
@@ -142,6 +153,7 @@ func _creer_row_slider(min_v: float, max_v: float, step: float, init: float, f: 
 	slider.value                 = init
 	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	slider.custom_minimum_size   = Vector2(0, int(40 * f))
+	slider.focus_mode            = Control.FOCUS_ALL
 
 	# Piste (fond gris)
 	var bg = StyleBoxFlat.new()

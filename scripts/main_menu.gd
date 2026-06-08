@@ -21,11 +21,14 @@ const C_BTN_H := Color(0.28, 0.28, 0.65, 1.0)
 var _label_best        : Label           = null
 var _sous_panel        : Control         = null
 var _btn_jouer         : Button          = null
-var _btn_overlay_focus : Button          = null
+var _btn_overlay_focus : Control         = null
 var _scroll_actif      : ScrollContainer = null
 
 func _process(delta: float) -> void:
 	if _scroll_actif == null or not _scroll_actif.is_inside_tree():
+		return
+	# Ne pas scroller quand un slider a le focus (le D-pad ajuste sa valeur)
+	if get_viewport().gui_get_focus_owner() is HSlider:
 		return
 	var axis : float = Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
 	if abs(axis) < 0.2:
@@ -495,8 +498,18 @@ func _construire_parametres() -> Control:
 	var btn = _btn("FERMER", f, false)
 	btn.pressed.connect(_fermer_sous_panel)
 	outer.add_child(btn)
-	_btn_overlay_focus = btn
+	_btn_overlay_focus = sl_v  # focus sur le 1er slider à l'ouverture
 	_scroll_actif      = base[3]
+
+	# Navigation D-pad entre sliders et bouton FERMER (configurée après entrée en scène)
+	fond.ready.connect(func():
+		sl_v.focus_neighbor_bottom = sl_v.get_path_to(sl_s)
+		sl_v.focus_neighbor_top    = sl_v.get_path_to(btn)
+		sl_s.focus_neighbor_bottom = sl_s.get_path_to(btn)
+		sl_s.focus_neighbor_top    = sl_s.get_path_to(sl_v)
+		btn.focus_neighbor_top     = btn.get_path_to(sl_s)
+		btn.focus_neighbor_bottom  = btn.get_path_to(sl_v)
+	)
 
 	return fond
 
@@ -640,6 +653,7 @@ func _creer_row_slider(min_v: float, max_v: float, step: float, init: float, f: 
 	slider.value                 = init
 	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	slider.custom_minimum_size   = Vector2(0, int(40 * f))
+	slider.focus_mode            = Control.FOCUS_ALL
 
 	var bg = StyleBoxFlat.new()
 	bg.bg_color                   = Color(0.18, 0.18, 0.38, 1.0)
