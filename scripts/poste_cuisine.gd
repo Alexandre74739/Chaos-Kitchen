@@ -82,7 +82,7 @@ func _poser_ingredient(nom: String, joueur):
 
 # ── Donne le burger entier au joueur ──────────────────────
 func _donner_burger_au_joueur(joueur):
-	if joueur.fusil_en_main:
+	if joueur.tient_fusil():
 		joueur.deposer_fusil()
 	elif joueur.tient_ingredient():
 		joueur.deposer_ingredient()

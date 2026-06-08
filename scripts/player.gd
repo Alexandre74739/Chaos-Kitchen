@@ -203,6 +203,9 @@ func _appliquer_inclinaison(direction: Vector3, delta: float):
 func tient_ingredient() -> bool:
 	return ingredient_en_main != null
 
+func tient_fusil() -> bool:
+	return fusil_en_main
+
 func prendre_ingredient(ingredient, nom):
 	if fusil_en_main:
 		deposer_fusil()
