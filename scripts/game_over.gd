@@ -2,8 +2,9 @@ extends CanvasLayer
 
 const FONT = preload("res://assets/fonts/MatchaCih.ttf")
 
-var _label_score : Label  = null
-var _btn_rejouer : Button = null
+var _label_score  : Label  = null
+var _label_raison : Label  = null
+var _btn_rejouer  : Button = null
 
 func _ready() -> void:
 	layer        = 60
@@ -11,9 +12,15 @@ func _ready() -> void:
 	visible      = false
 	_construire_ui()
 
-func afficher(score_final: int) -> void:
+func afficher(score_final: int, raison: String = "") -> void:
 	if _label_score:
 		_label_score.text = "Score final : " + str(score_final)
+	if _label_raison:
+		_label_raison.text = raison
+		_label_raison.visible = raison != ""
+	var bs = get_node_or_null("/root/BestScore")
+	if bs:
+		bs.update(score_final)
 	visible = true
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -104,6 +111,22 @@ func _construire_ui() -> void:
 	ss.outline_color = Color(0, 0, 0, 1)
 	_label_score.label_settings = ss
 	vbox.add_child(_label_score)
+
+	# ── Raison du Game Over ───────────────────────────────
+	_label_raison = Label.new()
+	_label_raison.text                 = ""
+	_label_raison.visible              = false
+	_label_raison.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_label_raison.autowrap_mode        = TextServer.AUTOWRAP_WORD_SMART
+	_label_raison.custom_minimum_size  = Vector2(int(460 * f), 0)
+	var sr = LabelSettings.new()
+	sr.font          = FONT
+	sr.font_size     = int(26 * f)
+	sr.font_color    = Color(1.0, 0.55, 0.55, 1.0)
+	sr.outline_size  = 4
+	sr.outline_color = Color(0, 0, 0, 1)
+	_label_raison.label_settings = sr
+	vbox.add_child(_label_raison)
 
 	# ── Hint manette ──────────────────────────────────────
 	var hint = Label.new()

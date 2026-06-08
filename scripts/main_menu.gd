@@ -387,10 +387,12 @@ func _construire_regles() -> Control:
 	vbox.add_child(_corps(
 		"Clavier\n" +
 		"   E                        Ramasser / Livrer un burger\n" +
-		"   Clic gauche          Tirer (avec le fusil)\n\n" +
+		"   Clic droit          Tirer (avec le fusil)\n" +
+		"   Clic gauche             Viser — zoom FOV + réticule\n\n" +
 		"Manette\n" +
 		"   A / Croix              Ramasser / Livrer un burger\n" +
-		"   Gâchette droite   Tirer (avec le fusil)", f))
+		"   Gâchette droite   Tirer (avec le fusil)\n" +
+		"   Gâchette gauche  Viser — zoom FOV + réticule", f))
 	vbox.add_child(_sep(f))
 
 	vbox.add_child(_entete("ASSEMBLER UN BURGER", f))
@@ -401,13 +403,24 @@ func _construire_regles() -> Control:
 		"3.  Apporte le burger au client et appuie sur E / A", f))
 	vbox.add_child(_sep(f))
 
+	vbox.add_child(_entete("RATS & INSPECTEUR", f))
+	vbox.add_child(_corps(
+		"Des rats envahissent la cuisine au fil du temps.\n" +
+		"Élimine-les avec le fusil avant l'arrivée de l'inspecteur.\n\n" +
+		"La barre en haut indique l'approche de l'inspecteur.\n" +
+		"Si des rats sont présents lors de l'inspection → fermeture sanitaire !\n" +
+		"Cuisine propre : +250 points", f))
+	vbox.add_child(_sep(f))
+
 	vbox.add_child(_entete("SCORE", f))
 	vbox.add_child(_corps(
 		"+50      Bonne commande livrée\n" +
 		"−20      Mauvaise commande\n" +
 		"−50      Client parti sans être servi\n" +
-		"−150    Client éliminé avec le fusil\n\n" +
-		"Game Over si score ≤ −500", f))
+		"−150    Client éliminé avec le fusil\n" +
+		"+250    Inspection sanitaire réussie\n\n" +
+		"Game Over si score ≤ −500\n" +
+		"Game Over si 5 clients perdent patience", f))
 
 	# Bouton FERMER (fixe, hors scroll)
 	outer.add_child(_sep(f))
