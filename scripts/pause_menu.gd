@@ -8,6 +8,7 @@ var _lbl_val_sens        : Label   = null
 var _slider_volume       : HSlider = null
 var _lbl_val_volume      : Label   = null
 var _btn_reprendre       : Button  = null
+var _btn_menu            : Button  = null
 
 func _ready() -> void:
 	layer        = 50
@@ -126,19 +127,26 @@ func _construire_ui() -> void:
 	_btn_reprendre.pressed.connect(_reprendre)
 	vbox.add_child(_btn_reprendre)
 
+	_btn_menu = _creer_bouton("Menu Principal", f)
+	_btn_menu.focus_mode = Control.FOCUS_ALL
+	_btn_menu.pressed.connect(_aller_menu)
+	vbox.add_child(_btn_menu)
+
 	var btn_q = _creer_bouton("Quitter", f)
 	btn_q.focus_mode = Control.FOCUS_ALL
 	btn_q.pressed.connect(_quitter)
 	vbox.add_child(btn_q)
 
-	# Navigation D-pad : sensibilité ↕ volume ↕ reprendre ↕ quitter (boucle)
+	# Navigation D-pad : sensibilité ↕ volume ↕ reprendre ↕ menu ↕ quitter (boucle)
 	_slider_sensibilite.focus_neighbor_top    = _slider_sensibilite.get_path_to(btn_q)
 	_slider_sensibilite.focus_neighbor_bottom = _slider_sensibilite.get_path_to(_slider_volume)
 	_slider_volume.focus_neighbor_top         = _slider_volume.get_path_to(_slider_sensibilite)
 	_slider_volume.focus_neighbor_bottom      = _slider_volume.get_path_to(_btn_reprendre)
 	_btn_reprendre.focus_neighbor_top         = _btn_reprendre.get_path_to(_slider_volume)
-	_btn_reprendre.focus_neighbor_bottom      = _btn_reprendre.get_path_to(btn_q)
-	btn_q.focus_neighbor_top                  = btn_q.get_path_to(_btn_reprendre)
+	_btn_reprendre.focus_neighbor_bottom      = _btn_reprendre.get_path_to(_btn_menu)
+	_btn_menu.focus_neighbor_top              = _btn_menu.get_path_to(_btn_reprendre)
+	_btn_menu.focus_neighbor_bottom           = _btn_menu.get_path_to(btn_q)
+	btn_q.focus_neighbor_top                  = btn_q.get_path_to(_btn_menu)
 	btn_q.focus_neighbor_bottom               = btn_q.get_path_to(_slider_sensibilite)
 
 # ── Ligne slider + valeur ─────────────────────────────────────
@@ -311,6 +319,11 @@ func _reprendre() -> void:
 	visible   = false
 	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _aller_menu() -> void:
+	get_tree().paused = false
+	AudioManager.arreter_ambiance()
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _quitter() -> void:
 	get_tree().paused = false

@@ -5,6 +5,7 @@ const FONT = preload("res://assets/fonts/MatchaCih.ttf")
 var _label_score  : Label  = null
 var _label_raison : Label  = null
 var _btn_rejouer  : Button = null
+var _btn_menu     : Button = null
 
 func _ready() -> void:
 	layer        = 60
@@ -130,7 +131,7 @@ func _construire_ui() -> void:
 
 	# ── Hint manette ──────────────────────────────────────
 	var hint = Label.new()
-	hint.text                 = "Manette : A / Croix pour rejouer"
+	hint.text                 = "Manette : A / Croix pour rejouer  ·  D-Pad pour naviguer"
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var hint_sty = LabelSettings.new()
 	hint_sty.font          = FONT
@@ -185,3 +186,49 @@ func _construire_ui() -> void:
 		get_tree().reload_current_scene()
 	)
 	vbox.add_child(_btn_rejouer)
+
+	# ── Bouton Menu Principal ─────────────────────────────
+	_btn_menu = Button.new()
+	_btn_menu.text                = "MENU PRINCIPAL"
+	_btn_menu.custom_minimum_size = Vector2(int(260 * f), int(68 * f))
+	_btn_menu.alignment           = HORIZONTAL_ALIGNMENT_CENTER
+	_btn_menu.focus_mode          = Control.FOCUS_ALL
+	_btn_menu.add_theme_font_override("font", FONT)
+	_btn_menu.add_theme_font_size_override("font_size", int(40 * f))
+	_btn_menu.add_theme_color_override("font_color",         Color(1, 1, 1, 1))
+	_btn_menu.add_theme_color_override("font_hover_color",   Color(1, 1, 0.5, 1))
+	_btn_menu.add_theme_color_override("font_focus_color",   Color(1, 1, 0.5, 1))
+	_btn_menu.add_theme_color_override("font_pressed_color", Color(1, 0.8, 0.2, 1))
+
+	var menu_n = StyleBoxFlat.new()
+	menu_n.bg_color                   = Color(0.10, 0.10, 0.28, 1.0)
+	menu_n.corner_radius_top_left     = 14
+	menu_n.corner_radius_top_right    = 14
+	menu_n.corner_radius_bottom_left  = 14
+	menu_n.corner_radius_bottom_right = 14
+	menu_n.border_color               = Color(1.0, 0.72, 0.0, 0.6)
+	menu_n.border_width_left          = 3
+	menu_n.border_width_right         = 3
+	menu_n.border_width_top           = 3
+	menu_n.border_width_bottom        = 3
+	_btn_menu.add_theme_stylebox_override("normal", menu_n)
+
+	var menu_h = menu_n.duplicate() as StyleBoxFlat
+	menu_h.bg_color     = Color(0.22, 0.22, 0.52, 1.0)
+	menu_h.border_color = Color(1.0, 0.90, 0.30, 1.0)
+	_btn_menu.add_theme_stylebox_override("hover",   menu_h)
+	_btn_menu.add_theme_stylebox_override("focus",   menu_h)
+	_btn_menu.add_theme_stylebox_override("pressed", menu_h)
+
+	_btn_menu.pressed.connect(func():
+		get_tree().paused = false
+		AudioManager.arreter_ambiance()
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	)
+	vbox.add_child(_btn_menu)
+
+	# Navigation D-pad entre les deux boutons
+	_btn_rejouer.focus_neighbor_bottom = _btn_rejouer.get_path_to(_btn_menu)
+	_btn_rejouer.focus_neighbor_top    = _btn_rejouer.get_path_to(_btn_menu)
+	_btn_menu.focus_neighbor_top       = _btn_menu.get_path_to(_btn_rejouer)
+	_btn_menu.focus_neighbor_bottom    = _btn_menu.get_path_to(_btn_rejouer)

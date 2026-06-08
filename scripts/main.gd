@@ -17,7 +17,7 @@ const SEUIL_DEFAITE        = -500
 const SEUIL_CLIENTS_PERDUS = 5
 
 # ── Rats ──────────────────────────────────────────────────────────────
-const MAX_RATS             = 10
+const MAX_RATS             = 8
 const SPAWN_RAT_MIN        = 18.0
 const SPAWN_RAT_MAX        = 28.0
 
@@ -28,17 +28,20 @@ const DUREE_INSPECTION     = 12.0
 const BONUS_INSPECTION     = 250
 
 const ZONES_RATS = [
-	Vector3(3.0, 0.1,  -6.0),
-	Vector3(5.5, 0.1,  -5.5),
-	Vector3(7.0, 0.1,  -7.5),
-	Vector3(2.5, 0.1,  -8.5),
-	Vector3(6.0, 0.1,  -9.5),
-	Vector3(4.0, 0.1, -10.5),
-	Vector3(4.5, 0.1, -13.0),
-	Vector3(6.0, 0.1, -14.0),
-	Vector3(3.0, 0.1, -15.5),
-	Vector3(5.5, 0.1, -16.5),
-	Vector3(2.0, 0.1, -17.0),
+	# Toutes les zones sont sur le sol dégagé de la cuisine (X 5–9),
+	# loin des décors de gauche (cuisineDecoAngle, salleViande) et des murs.
+	Vector3(5.5, 0.1,  -7.0),
+	Vector3(7.5, 0.1,  -6.5),
+	Vector3(8.5, 0.1,  -8.0),
+	Vector3(5.0, 0.1,  -9.5),
+	Vector3(7.0, 0.1,  -9.0),
+	Vector3(8.5, 0.1, -11.0),
+	Vector3(6.0, 0.1, -11.5),
+	Vector3(7.5, 0.1, -13.0),
+	Vector3(5.5, 0.1, -13.5),
+	Vector3(8.0, 0.1, -15.0),
+	Vector3(6.5, 0.1, -15.5),
+	Vector3(7.0, 0.1, -16.5),
 ]
 
 # ── État du jeu ───────────────────────────────────────────────────────
@@ -76,7 +79,10 @@ var _bar_fill_sty            : StyleBoxFlat = null
 
 # ─────────────────────────────────────────────────────────────────────
 func _ready() -> void:
+	AudioManager.ambiance_player.volume_db = -60.0
 	AudioManager.jouer_ambiance("ambiance")
+	create_tween().tween_property(AudioManager.ambiance_player, "volume_db", -6.0, 1.5) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	_collecter_chaises()
 	_lancer_timer_spawn()
 	_creer_score_ui()
@@ -404,7 +410,7 @@ func _spawner_vague_rats() -> void:
 	zones_dispo.shuffle()
 	for i in range(MAX_RATS):
 		var zone   = zones_dispo[i % zones_dispo.size()]
-		var offset = Vector3(randf_range(-0.5, 0.5), 0.0, randf_range(-0.5, 0.5))
+		var offset = Vector3(randf_range(-0.3, 0.3), 0.0, randf_range(-0.3, 0.3))
 		var rat    = CharacterBody3D.new()
 		rat.set_script(load(RAT_SCRIPT))
 		rat.position = zone + offset

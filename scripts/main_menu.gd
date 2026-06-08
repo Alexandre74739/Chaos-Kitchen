@@ -40,6 +40,12 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_setup_camera()
 	_setup_ui()
+	_jouer_intro()
+
+func _jouer_intro() -> void:
+	AudioManager.jouer_musique("intro")
+	if not AudioManager.musique_player.finished.is_connected(_jouer_intro):
+		AudioManager.musique_player.finished.connect(_jouer_intro)
 
 
 # ── BACKDROP : scène de jeu sans logique ──────────────────────────
@@ -171,6 +177,10 @@ func _on_jouer() -> void:
 	if _btn_jouer:
 		_btn_jouer.disabled = true
 
+	# Déconnecte la boucle de l'intro et démarre le fondu sortant
+	if AudioManager.musique_player.finished.is_connected(_jouer_intro):
+		AudioManager.musique_player.finished.disconnect(_jouer_intro)
+
 	var tween = create_tween()
 	tween.set_parallel(true)
 
@@ -178,6 +188,10 @@ func _on_jouer() -> void:
 	if _panneau_gauche:
 		tween.tween_property(_panneau_gauche, "modulate:a", 0.0, 0.8) \
 			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	# Fondu sortant de l'intro sur toute la durée de l'animation caméra
+	tween.tween_property(AudioManager.musique_player, "volume_db", -60.0, 3.5) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	# Animation FOV
 	tween.tween_property(_cam, "fov", 52.0, 3.5) \
@@ -206,6 +220,7 @@ func _on_jouer() -> void:
 	fade.tween_property(rect, "color:a", 1.0, 0.35)
 	await fade.finished
 
+	AudioManager.arreter_musique()
 	get_tree().change_scene_to_file("res://main.tscn")
 
 func _on_regles() -> void:
