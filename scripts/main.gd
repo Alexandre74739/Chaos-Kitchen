@@ -17,7 +17,7 @@ const SEUIL_DEFAITE        = -500
 const SEUIL_CLIENTS_PERDUS = 5
 
 # ── Rats ──────────────────────────────────────────────────────────────
-const MAX_RATS             = 6
+const MAX_RATS             = 10
 const SPAWN_RAT_MIN        = 18.0
 const SPAWN_RAT_MAX        = 28.0
 
@@ -393,16 +393,17 @@ func _lancer_timer_rats() -> void:
 	timer_rat          = Timer.new()
 	timer_rat.one_shot = true
 	add_child(timer_rat)
-	timer_rat.timeout.connect(_spawner_rat)
-	_programmer_prochain_rat()
+	# Pas de spawn initial — les rats n'apparaissent qu'après la 1ère inspection
 
 func _programmer_prochain_rat(min_t: float = SPAWN_RAT_MIN, max_t: float = SPAWN_RAT_MAX) -> void:
 	timer_rat.wait_time = randf_range(min_t, max_t)
 	timer_rat.start()
 
-func _spawner_rat() -> void:
-	if not _defaite_declenchee and not _inspection_active and rats_vivants < MAX_RATS:
-		var zone   = ZONES_RATS[randi() % ZONES_RATS.size()]
+func _spawner_vague_rats() -> void:
+	var zones_dispo = ZONES_RATS.duplicate()
+	zones_dispo.shuffle()
+	for i in range(MAX_RATS):
+		var zone   = zones_dispo[i % zones_dispo.size()]
 		var offset = Vector3(randf_range(-0.5, 0.5), 0.0, randf_range(-0.5, 0.5))
 		var rat    = CharacterBody3D.new()
 		rat.set_script(load(RAT_SCRIPT))
@@ -410,10 +411,7 @@ func _spawner_rat() -> void:
 		add_child(rat)
 		rat.mort.connect(_on_rat_mort)
 		rats_vivants += 1
-		_maj_hud_rats()
-
-	if not _defaite_declenchee and not _inspection_active:
-		_programmer_prochain_rat()
+	_maj_hud_rats()
 
 func _on_rat_mort() -> void:
 	rats_vivants = max(0, rats_vivants - 1)
@@ -534,7 +532,7 @@ func _fin_inspection() -> void:
 		_inspection_active = false
 		_modifier_score(BONUS_INSPECTION)
 		AudioManager.jouer_sfx("win_pts")
-		_programmer_prochain_rat(3.0, 12.0)
+		_spawner_vague_rats()
 		_programmer_prochain_inspecteur()
 
 # ── Helper label HUD ──────────────────────────────────────────────────

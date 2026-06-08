@@ -13,7 +13,7 @@ var _cible     : Vector3 = Vector3.ZERO
 var _temps_bob : float   = 0.0
 
 func _ready() -> void:
-	collision_layer = 1
+	collision_layer = 1.5
 	collision_mask  = 1
 
 	var shape      = CapsuleShape3D.new()
