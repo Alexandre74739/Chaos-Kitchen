@@ -18,10 +18,24 @@ const C_JAUNE := Color(1.0,  1.0,  0.2,  1.0)
 const C_BTN_N := Color(0.15, 0.15, 0.40, 1.0)
 const C_BTN_H := Color(0.28, 0.28, 0.65, 1.0)
 
-var _label_best        : Label   = null
-var _sous_panel        : Control = null
-var _btn_jouer         : Button  = null
-var _btn_overlay_focus : Button  = null
+var _label_best        : Label           = null
+var _sous_panel        : Control         = null
+var _btn_jouer         : Button          = null
+var _btn_overlay_focus : Button          = null
+var _scroll_actif      : ScrollContainer = null
+
+func _process(delta: float) -> void:
+	if _scroll_actif == null or not _scroll_actif.is_inside_tree():
+		return
+	var axis : float = Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
+	if abs(axis) < 0.2:
+		axis = 0.0
+	if Input.is_joy_button_pressed(0, JOY_BUTTON_DPAD_DOWN):
+		axis = 1.0
+	elif Input.is_joy_button_pressed(0, JOY_BUTTON_DPAD_UP):
+		axis = -1.0
+	if axis != 0.0:
+		_scroll_actif.scroll_vertical += int(axis * 420.0 * delta)
 
 
 func _ready() -> void:
@@ -293,6 +307,7 @@ func _afficher_sous_panel(contenu: Control) -> void:
 
 func _fermer_sous_panel() -> void:
 	_btn_overlay_focus = null
+	_scroll_actif      = null
 	_sous_panel.visible = false
 	for c in _sous_panel.get_children():
 		c.queue_free()
@@ -428,6 +443,7 @@ func _construire_regles() -> Control:
 	btn.pressed.connect(_fermer_sous_panel)
 	outer.add_child(btn)
 	_btn_overlay_focus = btn
+	_scroll_actif      = base[3]
 
 	return fond
 
@@ -480,6 +496,7 @@ func _construire_parametres() -> Control:
 	btn.pressed.connect(_fermer_sous_panel)
 	outer.add_child(btn)
 	_btn_overlay_focus = btn
+	_scroll_actif      = base[3]
 
 	return fond
 
@@ -523,6 +540,7 @@ func _construire_credits() -> Control:
 	btn.pressed.connect(_fermer_sous_panel)
 	outer.add_child(btn)
 	_btn_overlay_focus = btn
+	_scroll_actif      = base[3]
 
 	return fond
 
