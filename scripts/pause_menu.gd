@@ -7,6 +7,7 @@ var _slider_sensibilite  : HSlider = null
 var _lbl_val_sens        : Label   = null
 var _slider_volume       : HSlider = null
 var _lbl_val_volume      : Label   = null
+var _btn_reprendre       : Button  = null
 
 func _ready() -> void:
 	layer        = 50
@@ -79,11 +80,28 @@ func _construire_ui() -> void:
 	sous.label_settings = ss
 	vbox.add_child(sous)
 
+	# ── Hint manette ──────────────────────────────────────
+	var hint = Label.new()
+	hint.text                 = "Manette : Start pour reprendre  ·  B / Rond pour quitter"
+	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var sh = LabelSettings.new()
+	sh.font          = FONT
+	sh.font_size     = int(22 * f)
+	sh.font_color    = Color(0.85, 0.85, 0.65, 0.80)
+	sh.outline_size  = 3
+	sh.outline_color = Color(0, 0, 0, 1)
+	hint.label_settings = sh
+	vbox.add_child(hint)
+
 	vbox.add_child(_sep(f))
 
 	# ── Sensibilité souris ────────────────────────────────
 	vbox.add_child(_lbl_section("Sensibilite souris", f))
-	var row_s = _creer_row_slider(1.0, 10.0, 0.5, 3.0, f)
+	var _init_sens := 3.0
+	var _bs_init = get_node_or_null("/root/BestScore")
+	if _bs_init:
+		_init_sens = _bs_init.get_sensitivity()
+	var row_s = _creer_row_slider(1.0, 10.0, 0.5, _init_sens, f)
 	_slider_sensibilite = row_s[0]
 	_lbl_val_sens       = row_s[1]
 	_lbl_val_sens.text  = _fmt_sens(_slider_sensibilite.value)
@@ -103,9 +121,10 @@ func _construire_ui() -> void:
 	vbox.add_child(_sep(f))
 
 	# ── Boutons ───────────────────────────────────────────
-	var btn_r = _creer_bouton("Reprendre", f)
-	btn_r.pressed.connect(_reprendre)
-	vbox.add_child(btn_r)
+	_btn_reprendre = _creer_bouton("Reprendre", f)
+	_btn_reprendre.focus_mode = Control.FOCUS_ALL
+	_btn_reprendre.pressed.connect(_reprendre)
+	vbox.add_child(_btn_reprendre)
 
 	var btn_q = _creer_bouton("Quitter", f)
 	btn_q.pressed.connect(_quitter)
@@ -227,6 +246,9 @@ func _creer_bouton(texte: String, f: float) -> Button:
 # ── Callbacks sliders ─────────────────────────────────────────
 func _on_sensibilite(val: float) -> void:
 	_lbl_val_sens.text = _fmt_sens(val)
+	var bs = get_node_or_null("/root/BestScore")
+	if bs:
+		bs.update_sensitivity(val)
 	var player = _get_player()
 	if player and "mouse_sensitivity" in player:
 		player.mouse_sensitivity = val / 1000.0
@@ -269,6 +291,8 @@ func afficher() -> void:
 	var player = _get_player()
 	if player and "mouse_sensitivity" in player and _slider_sensibilite:
 		_slider_sensibilite.value = player.mouse_sensitivity * 1000.0
+	if _btn_reprendre:
+		_btn_reprendre.grab_focus()
 
 func _reprendre() -> void:
 	_en_pause = false

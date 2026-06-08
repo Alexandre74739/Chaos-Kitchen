@@ -1,9 +1,9 @@
 extends Node3D
 
 const CLIENT_SCENE        = preload("res://entities/personnages/client.tscn")
-const SCORE_UI_SCRIPT     = preload("res://scripts/score_ui.gd")
-const PAUSE_MENU_SCRIPT   = preload("res://scripts/pause_menu.gd")
-const GAME_OVER_SCRIPT    = preload("res://scripts/game_over.gd")
+const SCORE_UI_SCRIPT     = "res://scripts/score_ui.gd"
+const PAUSE_MENU_SCRIPT   = "res://scripts/pause_menu.gd"
+const GAME_OVER_SCRIPT    = "res://scripts/game_over.gd"
 
 const SPAWN_MIN           = 15.0
 const SPAWN_MAX           = 30.0
@@ -33,21 +33,21 @@ func _ready() -> void:
 # ── Score UI ──────────────────────────────────────────────────
 func _creer_score_ui() -> void:
 	var canvas = CanvasLayer.new()
-	canvas.set_script(SCORE_UI_SCRIPT)
+	canvas.set_script(load(SCORE_UI_SCRIPT))
 	add_child(canvas)
 	score_ui = canvas
 
 # ── Menu Pause ────────────────────────────────────────────────
 func _creer_pause_menu() -> void:
 	var canvas = CanvasLayer.new()
-	canvas.set_script(PAUSE_MENU_SCRIPT)
+	canvas.set_script(load(PAUSE_MENU_SCRIPT))
 	add_child(canvas)
 	pause_menu = canvas
 
 # ── Écran Game Over ───────────────────────────────────────────
 func _creer_game_over() -> void:
 	var canvas = CanvasLayer.new()
-	canvas.set_script(GAME_OVER_SCRIPT)
+	canvas.set_script(load(GAME_OVER_SCRIPT))
 	add_child(canvas)
 	game_over_screen = canvas
 
@@ -138,6 +138,9 @@ func _modifier_score(delta: int) -> void:
 
 func _declencher_defaite() -> void:
 	timer_spawn.stop()
+	var bs = get_node_or_null("/root/BestScore")
+	if bs:
+		bs.update(score)
 	if game_over_screen != null:
 		game_over_screen.afficher(score)
 

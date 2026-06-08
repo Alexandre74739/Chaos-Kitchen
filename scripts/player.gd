@@ -26,6 +26,9 @@ var fusil_en_main       = false
 var fusil_instance      = null
 
 func _ready():
+	var bs = get_node_or_null("/root/BestScore")
+	if bs:
+		mouse_sensitivity = bs.get_sensitivity() / 1000.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	interaction_zone.body_entered.connect(_on_body_entered)
 	interaction_zone.body_exited.connect(_on_body_exited)

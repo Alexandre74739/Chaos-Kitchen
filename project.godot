@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Chaos Kitchen"
-run/main_scene="uid://dohwlug7cn4qh"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/mode=3
 
 [audio]
 
@@ -22,6 +26,7 @@ buses/default_bus_layout="uid://c4woawgvao0oy"
 [autoload]
 
 AudioManager="*uid://clgemjhmht7a1"
+BestScore="*res://scripts/best_score.gd"
 
 [input]
 
