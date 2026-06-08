@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bnif6yvqaojvc" path="res://decor/bacViande.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://e61t1uihktfy" path="res://decor/salleViande.tscn" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://clarwacyh6sxa" path="res://decor/Table&Chaises.tscn" id="13_ycdy4"]
-[ext_resource type="PackedScene" uid="uid://dbwem3nbmebwu" path="res://decor/post_process.tscn" id="14_ppfx"]
+[ext_resource type="PackedScene" path="res://decor/post_process.tscn" id="14_ppfx"]
 [ext_resource type="PackedScene" uid="uid://d3fyewm4x1pjq" path="res://entities/items/fusil.tscn" id="15_fusil"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]

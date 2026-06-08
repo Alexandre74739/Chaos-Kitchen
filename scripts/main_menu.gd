@@ -31,14 +31,6 @@ func _ready() -> void:
 	_setup_camera()
 	_setup_ui()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		var focused = get_viewport().gui_get_focus_owner()
-		if focused is Button:
-			(focused as Button).emit_signal("pressed")
-			get_viewport().set_input_as_handled()
-
-
 # ── MONDE 3D ──────────────────────────────────────────────────────
 
 func _setup_world() -> void:
@@ -261,6 +253,10 @@ func _creer_panneau_gauche() -> Control:
 		var b = _btn(row[0], f, false)
 		b.pressed.connect(row[1])
 		vbox.add_child(b)
+		
+	var btn_quitter = _btn("QUITTER", f, false)
+	btn_quitter.pressed.connect(_on_quitter)
+	vbox.add_child(btn_quitter)
 
 	# Hint manette
 	var hint = _lbl("Manette : D-Pad naviguer  ·  A/Croix sélectionner",
@@ -283,6 +279,9 @@ func _on_parametres() -> void:
 
 func _on_credits() -> void:
 	_afficher_sous_panel(_construire_credits())
+	
+func _on_quitter() -> void:
+	get_tree().quit()
 
 func _afficher_sous_panel(contenu: Control) -> void:
 	for c in _sous_panel.get_children():
