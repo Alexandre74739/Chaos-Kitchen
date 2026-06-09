@@ -47,6 +47,20 @@ func _jouer_intro() -> void:
 	if not AudioManager.musique_player.finished.is_connected(_jouer_intro):
 		AudioManager.musique_player.finished.connect(_jouer_intro)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_fullscreen"):
+		var mode = DisplayServer.window_get_mode()
+		if mode == DisplayServer.WINDOW_MODE_FULLSCREEN or mode == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("ui_accept"):
+		var focused = get_viewport().gui_get_focus_owner()
+		if focused is Button:
+			(focused as Button).emit_signal("pressed")
+			get_viewport().set_input_as_handled()
+
 
 # ── BACKDROP : scène de jeu sans logique ──────────────────────────
 

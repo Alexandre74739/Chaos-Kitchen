@@ -108,6 +108,15 @@ func _ready():
 	_creer_reticule()
 
 func _input(event):
+	# ── Plein écran ───────────────────────────────────────
+	if event.is_action_pressed("toggle_fullscreen"):
+		var mode = DisplayServer.window_get_mode()
+		if mode == DisplayServer.WINDOW_MODE_FULLSCREEN or mode == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		get_viewport().set_input_as_handled()
+
 	# ── Rotation caméra souris ────────────────────────────
 	if event is InputEventMouseMotion:
 		var s = mouse_sensitivity * (VITESSE_VISE if _viser_actif else 1.0)

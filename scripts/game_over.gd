@@ -156,7 +156,7 @@ func _construire_ui() -> void:
 	_btn_rejouer.add_theme_color_override("font_pressed_color", Color(1, 0.8, 0.2, 1))
 
 	var btn_n = StyleBoxFlat.new()
-	btn_n.bg_color                   = Color(0.15, 0.15, 0.40, 1.0)
+	btn_n.bg_color                   = Color(0.15, 0.15, 0.4, 1.0)
 	btn_n.corner_radius_top_left     = 14
 	btn_n.corner_radius_top_right    = 14
 	btn_n.corner_radius_bottom_left  = 14
